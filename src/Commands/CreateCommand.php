@@ -12,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class CreateCommand extends Command
 {
+    use FieldsTrait;
+
     protected function configure(): void
     {
         $this->setName('create');
@@ -20,7 +22,7 @@ final class CreateCommand extends Command
         $this->addArgument('path', mode: InputArgument::REQUIRED);
 
         // creation options
-        $this->addOption('output', 'o', mode: InputOption::VALUE_REQUIRED, description: 'Output torrent file');
+        $this->addOption('output', 'o', mode: InputOption::VALUE_REQUIRED, description: 'Output torrent file (if omitted, adds .torrent to the path)');
         $this->addOption(
             'metadata-version',
             mode: InputOption::VALUE_REQUIRED,
@@ -46,53 +48,7 @@ final class CreateCommand extends Command
             default: '512K',
         );
 
-        // additional fields
-        $this->addOption(
-            'name',
-            mode: InputOption::VALUE_REQUIRED,
-            description: 'Torrent name',
-        );
-        $this->addOption(
-            'private',
-            mode: InputOption::VALUE_OPTIONAL,
-            description: 'Private torrent',
-        );
-        $this->addOption(
-            'comment',
-            mode: InputOption::VALUE_REQUIRED,
-            description: 'Torrent description',
-        );
-        $this->addOption(
-            'created-by',
-            mode: InputOption::VALUE_REQUIRED,
-            description: 'Created by field',
-        );
-        $this->addOption(
-            'no-created-by',
-            mode: InputOption::VALUE_NONE,
-            description: 'Erase created by',
-        );
-        $this->addOption(
-            'creation-date',
-            mode: InputOption::VALUE_REQUIRED,
-            description: 'Override creation date',
-        );
-        $this->addOption(
-            'no-creation-date',
-            mode: InputOption::VALUE_NONE,
-            description: 'Erase creation date',
-        );
-        $this->addOption(
-            'announce',
-            mode: InputOption::VALUE_REQUIRED,
-            description: 'Tracker',
-        );
-        $this->addOption(
-            'announce-list',
-            mode: InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-            description: 'Comma separated list of trackers for a single announce tier. Use multiple times to create multiple tiers',
-            default: [],
-        );
+        $this->configureFields();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -118,32 +74,7 @@ final class CreateCommand extends Command
             detectSymlinks: $input->getOption('detect-symlinks'),
         );
 
-        // additional fields
-        if ($input->getOption('name')) {
-            $torrent->setName($input->getOption('name'));
-        }
-        $torrent->setPrivate($input->getOption('private'));
-        $torrent->setComment($input->getOption('comment'));
-        $torrent->setAnnounce($input->getOption('announce'));
-        $torrent->setAnnounceList(array_map(fn ($s) => explode(',', $s), $input->getOption('announce-list')));
-
-        if ($input->getOption('no-created-by')) {
-            $torrent->setCreatedBy(null);
-        } elseif ($input->getOption('created-by') !== null) {
-            $torrent->setCreatedBy($input->getOption('created-by'));
-        }
-
-        if ($input->getOption('no-creation-date')) {
-            $torrent->setCreationDate(null);
-        } elseif ($input->getOption('creation-date') !== null) {
-            $date = $input->getOption('creation-date');
-            if (is_numeric($date)) {
-                $date = intval($date);
-            } else {
-                $date = new \DateTimeImmutable($date);
-            }
-            $torrent->setCreationDate($date);
-        }
+        $this->applyFields($input, $torrent);
 
         $outputFile = $input->getOption('output') ?? $path . '.torrent';
 
