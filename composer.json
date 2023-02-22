@@ -1,0 +1,28 @@
+{
+    "name": "arokettu/torrent-file-cli",
+    "type": "project",
+    "license": "MIT",
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Arokettu\\Torrent\\CLI\\": "src"
+        }
+    },
+    "bin": [
+        "bin/torrent-file"
+    ],
+    "require": {
+        "composer-runtime-api": "^2.2",
+        "arokettu/torrent-file": "dev-master",
+        "symfony/console": "^6.2"
+    },
+    "require-dev": {
+        "sandfox.dev/code-standard": "^1.2022.06.29",
+        "squizlabs/php_codesniffer": "*"
+    }
+}
