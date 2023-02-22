@@ -17,7 +17,10 @@
         "bin/torrent-file"
     ],
     "require": {
+        "php": "^8.1",
+        "ext-intl": "*",
         "composer-runtime-api": "^2.2",
+        "arokettu/kilo-mega": "^1.0",
         "arokettu/torrent-file": "dev-master",
         "symfony/console": "^6.2"
     },

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d67daf330083fb40e790f7ec2d821539",
+    "content-hash": "e9ce2f102c25becfee9f48ae13fa8d20",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -136,6 +136,59 @@
                 "source": "https://gitlab.com/sandfox/is-resource"
             },
             "time": "2022-09-01T22:54:06+00:00"
+        },
+        {
+            "name": "arokettu/kilo-mega",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arokettu/kilo-mega.git",
+                "reference": "80924c7c17ec37c8166f15c3eb5b0980032e2874"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arokettu/kilo-mega/zipball/80924c7c17ec37c8166f15c3eb5b0980032e2874",
+                "reference": "80924c7c17ec37c8166f15c3eb5b0980032e2874",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "sandfox.dev/code-standard": "^1",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/lib.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Smirnov",
+                    "email": "sandfox@sandfox.me",
+                    "homepage": "https://sandfox.me/",
+                    "role": "developer"
+                }
+            ],
+            "description": "A metric formatter for PHP",
+            "homepage": "https://sandfox.dev/php/kilo-mega.html",
+            "keywords": [
+                "bytes",
+                "formatting",
+                "metric"
+            ],
+            "support": {
+                "chat": "https://gitter.im/arokettu/community",
+                "issues": "https://gitlab.com/sandfox/kilo-mega/-/issues",
+                "source": "https://gitlab.com/sandfox/kilo-mega"
+            },
+            "time": "2023-02-22T18:08:43+00:00"
         },
         {
             "name": "arokettu/torrent-file",
@@ -1761,6 +1814,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+        "php": "^8.1",
+        "ext-intl": "*",
         "composer-runtime-api": "^2.2"
     },
     "platform-dev": [],
