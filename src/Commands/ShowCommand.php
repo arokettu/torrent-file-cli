@@ -44,6 +44,8 @@ class ShowCommand extends Command
             $output->writeln("<comment>Comment:</comment> " . $comment);
         }
 
+        $output->writeln("<comment>Private:</comment> " . ($torrent->isPrivate() ? 'yes' : 'no'));
+
         if (($date = $torrent->getCreationDate())) {
             $f = new \IntlDateFormatter(
                 \Locale::getDefault(),
@@ -55,6 +57,39 @@ class ShowCommand extends Command
 
         if (($createdBy = $torrent->getCreatedBy())) {
             $output->writeln("<comment>Created by:</comment> " . $createdBy);
+        }
+
+        if (($announce = $torrent->getAnnounce())) {
+            $output->writeln("<comment>Tracker:</comment> " . $announce);
+        }
+
+        if (!($announceList = $torrent->getAnnounceList())->empty()) {
+            $output->writeln("<comment>Tracker list:</comment>");
+            foreach ($announceList as $i => $tier) {
+                $output->write(($i + 1) . '. ');
+                foreach ($tier as $ii => $tracker) {
+                    $output->write(($ii === 0 ? '' : '   ') . ($ii + 1) . '. ');
+                    $output->writeln($tracker);
+                }
+            }
+        }
+
+        if (!($httpSeeds = $torrent->getHttpSeeds())->empty()) {
+            foreach ($httpSeeds as $httpSeed) {
+                $output->writeln($httpSeed);
+            }
+        }
+
+        if (!($urlList = $torrent->getUrlList())->empty()) {
+            foreach ($urlList as $url) {
+                $output->writeln($url);
+            }
+        }
+
+        if (!($nodes = $torrent->getNodes())->empty()) {
+            foreach ($nodes as $node) {
+                $output->writeln("{$node->host}:{$node->port}");
+            }
         }
 
         $output->writeln("<comment>Magnet link:</comment> " . $torrent->getMagnetLink());
@@ -86,9 +121,10 @@ class ShowCommand extends Command
                 implode('/', $file->path),
                 format_bytes($file->length),
                 $file->sha1,
+                $file->attributes->attr,
             ];
         }
 
-        $io->table(['File', 'Size', 'SHA1'], $table);
+        $io->table(['File', 'Size', 'SHA1', 'Attr'], $table);
     }
 }
