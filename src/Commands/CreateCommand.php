@@ -2,6 +2,7 @@
 
 namespace Arokettu\Torrent\CLI\Commands;
 
+use Arokettu\Torrent\MetaVersion;
 use Arokettu\Torrent\TorrentFile;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,7 +19,36 @@ final class CreateCommand extends Command
 
         $this->addArgument('path', mode: InputArgument::REQUIRED);
 
+        // creation options
         $this->addOption('output', 'o', mode: InputOption::VALUE_REQUIRED, description: 'Output torrent file');
+        $this->addOption(
+            'metadata-version',
+            'm',
+            mode: InputOption::VALUE_REQUIRED,
+            description: 'Torrent version: 1 or 2 or 1+2 (hybrid)',
+            default: '1+2',
+        );
+        $this->addOption(
+            'detect-exec',
+            null,
+            mode: InputOption::VALUE_NEGATABLE,
+            description: 'Detects and sets executable attribute on files <info>[default: true]</info>',
+            default: true,
+        );
+        $this->addOption(
+            'detect-symlinks',
+            null,
+            mode: InputOption::VALUE_NEGATABLE,
+            description: 'Detects and sets executable attribute on files <info>[default: false]</info>',
+            default: false,
+        );
+        $this->addOption(
+            'piece-length',
+            'p',
+            mode: InputOption::VALUE_REQUIRED,
+            description: 'Hashed piece length in bytes, must be a power of 2, minimum 16K (K and M postfixes can be used)',
+            default: '512K',
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -28,12 +58,44 @@ final class CreateCommand extends Command
             throw new \RuntimeException('Not a readable path');
         }
 
-        $torrent = TorrentFile::fromPath($path);
+        $metaVersion = match ($input->getOption('metadata-version')) {
+            '1' => MetaVersion::V1,
+            '2' => MetaVersion::V2,
+            '1+2' => [MetaVersion::V1, MetaVersion::V2],
+            default => throw new \RuntimeException('Unrecognized version: ' . $input->getOption('metadata-version')),
+        };
+
+        $torrent = TorrentFile::fromPath(
+            path: $path,
+            version: $metaVersion,
+            pieceLength: $this->parsePieceLength($input->getOption('piece-length')),
+            pieceAlign: false, // pure v1 only
+            detectExec: $input->getOption('detect-exec'),
+            detectSymlinks: $input->getOption('detect-symlinks'),
+        );
 
         $outputFile = $input->getOption('output') ?? $path . '.torrent';
 
         $torrent->store($outputFile);
 
         return 0;
+    }
+
+    private function parsePieceLength(string $length): int
+    {
+        $mul = 1;
+        if (str_ends_with($length, 'k') || str_ends_with($length, 'K')) {
+            $length = substr($length, 0, -1);
+            $mul = 1024;
+        } elseif (str_ends_with($length, 'm') || str_ends_with($length, 'M')) {
+            $length = substr($length, 0, -1);
+            $mul = 1024 * 1024;
+        }
+
+        if (!preg_match('/^\d+$/', $length)) {
+            throw new \RuntimeException('Invalid length');
+        }
+
+        return $length * $mul;
     }
 }
