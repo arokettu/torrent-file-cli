@@ -10,11 +10,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+
 use function Arokettu\KiloMega\format_bytes;
 
-class ShowCommand extends Command
+final class ShowCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('show');
         $this->setDescription('Show contents of the torrent file');
@@ -24,7 +25,7 @@ class ShowCommand extends Command
         $this->addOption('show-pad-files', mode: InputOption::VALUE_NONE, description: 'Show pad files if present');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -112,7 +113,7 @@ class ShowCommand extends Command
 
         $it = $torrentFile
             ->getFiles(MetaVersion::V1)
-            ->getIterator(skipPadFiles: !$input->hasArgument('show-pad-files'));
+            ->getIterator(skipPadFiles: !$input->getOption('show-pad-files'));
 
         $table = [];
 

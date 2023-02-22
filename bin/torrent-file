@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use Arokettu\Torrent\CLI\Commands\CreateCommand;
 use Arokettu\Torrent\CLI\Commands\ShowCommand;
 use Composer\InstalledVersions;
 use Symfony\Component\Console\Application;
@@ -12,6 +13,7 @@ $application = new Application(
     InstalledVersions::getPrettyVersion('arokettu/torrent-file-cli')
 );
 
+$application->add(new CreateCommand());
 $application->add(new ShowCommand());
 
 $application->run();

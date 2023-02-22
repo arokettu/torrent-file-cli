@@ -196,12 +196,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/arokettu/torrent-file.git",
-                "reference": "b7c4c74973b58f32aa2ca5889db37d0acfa46675"
+                "reference": "2af9c5acc4c2b16af750e43edc2909092824d471"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/torrent-file/zipball/b7c4c74973b58f32aa2ca5889db37d0acfa46675",
-                "reference": "b7c4c74973b58f32aa2ca5889db37d0acfa46675",
+                "url": "https://api.github.com/repos/arokettu/torrent-file/zipball/2af9c5acc4c2b16af750e43edc2909092824d471",
+                "reference": "2af9c5acc4c2b16af750e43edc2909092824d471",
                 "shasum": ""
             },
             "require": {
@@ -255,7 +255,7 @@
                 "issues": "https://gitlab.com/sandfox/torrent-file/-/issues",
                 "source": "https://gitlab.com/sandfox/torrent-file"
             },
-            "time": "2023-02-20T23:06:31+00:00"
+            "time": "2023-02-22T21:34:18+00:00"
         },
         {
             "name": "league/uri-components",
