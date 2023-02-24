@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arokettu\Torrent\CLI\Commands;
 
 use Arokettu\Torrent\MetaVersion;
@@ -22,7 +24,12 @@ final class CreateCommand extends Command
         $this->addArgument('path', mode: InputArgument::REQUIRED);
 
         // creation options
-        $this->addOption('output', 'o', mode: InputOption::VALUE_REQUIRED, description: 'Output torrent file (if omitted, adds .torrent to the path)');
+        $this->addOption(
+            'output',
+            'o',
+            mode: InputOption::VALUE_REQUIRED,
+            description: 'Output torrent file (if omitted, adds .torrent to the path)',
+        );
         $this->addOption(
             'metadata-version',
             mode: InputOption::VALUE_REQUIRED,
@@ -44,7 +51,8 @@ final class CreateCommand extends Command
         $this->addOption(
             'piece-length',
             mode: InputOption::VALUE_REQUIRED,
-            description: 'Hashed piece length in bytes, must be a power of 2, minimum 16K (K and M postfixes can be used)',
+            description:
+                'Hashed piece length in bytes, must be a power of 2, minimum 16K (K and M postfixes can be used)',
             default: '512K',
         );
 

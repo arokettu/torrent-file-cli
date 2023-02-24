@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arokettu\Torrent\CLI\Commands;
 
 use Arokettu\Torrent\TorrentFile;
@@ -54,7 +56,9 @@ trait FieldsTrait
         $this->addOption(
             'announce-list',
             mode: InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-            description: 'Comma separated list of trackers for a single announce tier. Use multiple times to create multiple tiers',
+            description:
+                'Comma separated list of trackers for a single announce tier. ' .
+                'Use multiple times to create multiple tiers',
             default: [],
         );
     }
@@ -81,7 +85,7 @@ trait FieldsTrait
         } elseif ($input->getOption('creation-date') !== null) {
             $date = $input->getOption('creation-date');
             if (is_numeric($date)) {
-                $date = intval($date);
+                $date = \intval($date);
             } else {
                 $date = new \DateTimeImmutable($date);
             }

@@ -5,5 +5,4 @@
 <ruleset name="Custom Standard" namespace="MyProject\CS\Standard">
     <rule ref="SandFox_PHP81"/>
     <file>src</file>
-    <file>tests</file>
 </ruleset>

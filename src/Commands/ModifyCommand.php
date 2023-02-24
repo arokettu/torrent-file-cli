@@ -15,13 +15,18 @@ final class ModifyCommand extends Command
 {
     use FieldsTrait;
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('modify');
         $this->setDescription('Modify a torrent file');
 
         $this->addArgument('path', mode: InputArgument::REQUIRED);
-        $this->addOption('output', 'o', mode: InputOption::VALUE_REQUIRED, description: 'Output torrent file (if omitted, overwrites)');
+        $this->addOption(
+            'output',
+            'o',
+            mode: InputOption::VALUE_REQUIRED,
+            description: 'Output torrent file (if omitted, overwrites)'
+        );
 
         $this->configureFields();
     }
