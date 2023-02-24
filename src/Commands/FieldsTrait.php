@@ -20,8 +20,9 @@ trait FieldsTrait
         );
         $this->addOption(
             'private',
-            mode: InputOption::VALUE_OPTIONAL,
+            mode: InputOption::VALUE_NEGATABLE,
             description: 'Private torrent',
+            default: false,
         );
         $this->addOption(
             'comment',
