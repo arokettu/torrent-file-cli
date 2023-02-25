@@ -6,6 +6,8 @@ namespace Arokettu\Torrent\CLI\Commands;
 
 use Arokettu\Torrent\MetaVersion;
 use Arokettu\Torrent\TorrentFile;
+use Arokettu\Torrent\V2\File as V2File;
+use Arokettu\Torrent\V2\Files as V2Files;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -105,7 +107,7 @@ final class ShowCommand extends Command
         }
 
         if ($torrent->hasMetadata(MetaVersion::V2)) {
-            $output->writeln("<error>V2 render: TODO</error>");
+            $this->renderFilesV2($torrent, $io, $input);
         }
 
         return 0;
@@ -132,5 +134,40 @@ final class ShowCommand extends Command
         }
 
         $io->table(['File', 'Size', 'SHA1', 'Attr'], $table);
+    }
+
+    private function renderFilesV2(TorrentFile $torrentFile, SymfonyStyle $io, InputInterface $input): void
+    {
+        $io->writeln("<comment>BitTorrent v2 info hash:</comment> " . $torrentFile->getInfoHash(MetaVersion::V2));
+        $io->writeln("<comment>BitTorrent v2 content:</comment>");
+
+        $it = new \RecursiveIteratorIterator(
+            $torrentFile->getFiles(MetaVersion::V2),
+            \RecursiveIteratorIterator::SELF_FIRST
+        );
+
+        $table = [];
+
+        /** @var V2File|V2Files $leaf */
+        foreach ($it as $leaf) {
+            // handle file
+            if ($leaf instanceof V2File) {
+                $table[] = [
+                    str_repeat('  ', \count($leaf->path) - 1) . $leaf->name,
+                    format_bytes($leaf->length),
+                    $leaf->piecesRoot,
+                    $leaf->attributes->attr,
+                ];
+                continue;
+            }
+
+            // handle dir
+            $name = $leaf->path[array_key_last($leaf->path)];
+            $table[] = [
+                str_repeat('  ', \count($leaf->path) - 1) . '/' . $name
+            ];
+        }
+
+        $io->table(['File', 'Size', 'Root Hash', 'Attr'], $table);
     }
 }
