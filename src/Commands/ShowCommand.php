@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Arokettu\Torrent\CLI\Commands;
 
-use Arokettu\Torrent\MetaVersion;
 use Arokettu\Torrent\TorrentFile;
 use Arokettu\Torrent\V2\File as V2File;
-use Arokettu\Torrent\V2\Files as V2Files;
+use Arokettu\Torrent\V2\FileTree as V2FileTree;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -102,11 +101,11 @@ final class ShowCommand extends Command
 
         $output->writeln("<comment>Magnet link:</comment> " . $torrent->getMagnetLink());
 
-        if ($torrent->hasMetadata(MetaVersion::V1)) {
+        if ($torrent->v1()) {
             $this->renderFilesV1($torrent, $io, $input);
         }
 
-        if ($torrent->hasMetadata(MetaVersion::V2)) {
+        if ($torrent->v2()) {
             $this->renderFilesV2($torrent, $io, $input);
         }
 
@@ -115,11 +114,10 @@ final class ShowCommand extends Command
 
     private function renderFilesV1(TorrentFile $torrentFile, SymfonyStyle $io, InputInterface $input): void
     {
-        $io->writeln("<comment>BitTorrent v1 info hash:</comment> " . $torrentFile->getInfoHash(MetaVersion::V1));
+        $io->writeln("<comment>BitTorrent v1 info hash:</comment> " . $torrentFile->v1()->getInfoHash());
         $io->writeln("<comment>BitTorrent v1 content:</comment>");
 
-        $it = $torrentFile
-            ->getFiles(MetaVersion::V1)
+        $it = $torrentFile->v1()->getFiles()
             ->getIterator(skipPadFiles: !$input->getOption('show-pad-files'));
 
         $table = [];
@@ -136,19 +134,19 @@ final class ShowCommand extends Command
         $io->table(['File', 'Size', 'SHA1', 'Attr'], $table);
     }
 
-    private function renderFilesV2(TorrentFile $torrentFile, SymfonyStyle $io, InputInterface $input): void
+    private function renderFilesV2(TorrentFile $torrentFile, SymfonyStyle $io): void
     {
-        $io->writeln("<comment>BitTorrent v2 info hash:</comment> " . $torrentFile->getInfoHash(MetaVersion::V2));
+        $io->writeln("<comment>BitTorrent v2 info hash:</comment> " . $torrentFile->v2()->getInfoHash());
         $io->writeln("<comment>BitTorrent v2 content:</comment>");
 
         $it = new \RecursiveIteratorIterator(
-            $torrentFile->getFiles(MetaVersion::V2),
+            $torrentFile->v2()->getFileTree(),
             \RecursiveIteratorIterator::SELF_FIRST
         );
 
         $table = [];
 
-        /** @var V2File|V2Files $leaf */
+        /** @var V2File|V2FileTree $leaf */
         foreach ($it as $leaf) {
             // handle file
             if ($leaf instanceof V2File) {
