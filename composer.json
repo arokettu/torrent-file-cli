@@ -1,7 +1,20 @@
 {
     "name": "arokettu/torrent-file-cli",
+    "description": "CLI tool to manipulate torrent files",
+    "keywords": ["torrent", "bittorrent", "console", "cli"],
     "type": "project",
     "license": "MIT",
+    "authors": [{
+        "name": "Anton Smirnov",
+        "email": "sandfox@sandfox.me",
+        "homepage": "https://sandfox.me/",
+        "role": "developer"
+    }],
+    "support": {
+        "issues": "https://gitlab.com/sandfox/torrent-file-cli/-/issues",
+        "source": "https://gitlab.com/sandfox/torrent-file-cli",
+        "chat": "https://gitter.im/arokettu/community"
+    },
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
