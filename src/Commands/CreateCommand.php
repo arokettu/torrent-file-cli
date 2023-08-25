@@ -107,6 +107,6 @@ final class CreateCommand extends Command
             throw new \RuntimeException('Invalid length');
         }
 
-        return $length * $mul;
+        return \intval($length) * $mul;
     }
 }

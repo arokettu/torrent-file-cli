@@ -44,6 +44,7 @@
     },
     "require-dev": {
         "sandfox.dev/code-standard": "^1.2022.06.29",
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "vimeo/psalm": "^5.15"
     }
 }
