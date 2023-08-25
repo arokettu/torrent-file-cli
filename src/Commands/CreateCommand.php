@@ -81,6 +81,7 @@ final class CreateCommand extends Command
             detectExec: $input->getOption('detect-exec'),
             detectSymlinks: $input->getOption('detect-symlinks'),
         );
+        $torrent->setCreatedBy('Torrent File CLI by Sand Fox https://gitlab.com/sandfox/torrent-file-cli');
 
         $this->applyFields($input, $torrent);
 

@@ -22,12 +22,16 @@ trait FieldsTrait
             'private',
             mode: InputOption::VALUE_NEGATABLE,
             description: 'Private torrent',
-            default: false,
         );
         $this->addOption(
             'comment',
             mode: InputOption::VALUE_REQUIRED,
             description: 'Torrent description',
+        );
+        $this->addOption(
+            'no-comment',
+            mode: InputOption::VALUE_NONE,
+            description: 'Erase torrent description',
         );
         $this->addOption(
             'created-by',
@@ -42,7 +46,7 @@ trait FieldsTrait
         $this->addOption(
             'creation-date',
             mode: InputOption::VALUE_REQUIRED,
-            description: 'Override creation date',
+            description: 'Set creation date',
         );
         $this->addOption(
             'no-creation-date',
@@ -55,12 +59,21 @@ trait FieldsTrait
             description: 'Tracker',
         );
         $this->addOption(
+            'no-announce',
+            mode: InputOption::VALUE_NONE,
+            description: 'Erase tracker',
+        );
+        $this->addOption(
             'announce-list',
             mode: InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
             description:
                 'Comma separated list of trackers for a single announce tier. ' .
                 'Use multiple times to create multiple tiers',
-            default: [],
+        );
+        $this->addOption(
+            'no-announce-list',
+            mode: InputOption::VALUE_NONE,
+            description: 'Erase list of trackers',
         );
     }
 
@@ -70,10 +83,28 @@ trait FieldsTrait
         if ($input->getOption('name')) {
             $torrent->setName($input->getOption('name'));
         }
-        $torrent->setPrivate($input->getOption('private'));
-        $torrent->setComment($input->getOption('comment'));
-        $torrent->setAnnounce($input->getOption('announce'));
-        $torrent->setAnnounceList(array_map(fn ($s) => explode(',', $s), $input->getOption('announce-list')));
+
+        if ($input->getOption('private') !== null) {
+            $torrent->setPrivate($input->getOption('private'));
+        }
+
+        if ($input->getOption('no-comment')) {
+            $torrent->setComment(null);
+        } elseif ($input->getOption('comment') !== null) {
+            $torrent->setComment($input->getOption('comment'));
+        }
+
+        if ($input->getOption('no-announce')) {
+            $torrent->setAnnounce(null);
+        } elseif ($input->getOption('announce') !== null) {
+            $torrent->setAnnounce($input->getOption('announce'));
+        }
+
+        if ($input->getOption('no-announce-list')) {
+            $torrent->setAnnounceList(null);
+        } elseif ($input->getOption('announce-list') !== null) {
+            $torrent->setAnnounceList(array_map(fn($s) => explode(',', $s), $input->getOption('announce-list')));
+        }
 
         if ($input->getOption('no-created-by')) {
             $torrent->setCreatedBy(null);

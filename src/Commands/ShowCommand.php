@@ -56,7 +56,7 @@ final class ShowCommand extends Command
                 \IntlDateFormatter::MEDIUM,
                 \IntlDateFormatter::MEDIUM,
             );
-            $output->writeln("<comment>Created on:</comment> " . $f->format($date));
+            $output->writeln("<comment>Created on:</comment> " . $f->format($date) . ' UTC');
         }
 
         if (($createdBy = $torrent->getCreatedBy())) {
