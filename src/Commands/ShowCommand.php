@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Arokettu\Torrent\CLI\Commands;
 
 use Arokettu\Torrent\TorrentFile;
-use Arokettu\Torrent\V2\File as V2File;
-use Arokettu\Torrent\V2\FileTree as V2FileTree;
+use Arokettu\Torrent\TorrentFile\V2\File as V2File;
+use Arokettu\Torrent\TorrentFile\V2\FileTree as V2FileTree;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -106,7 +106,7 @@ final class ShowCommand extends Command
         }
 
         if ($torrent->v2()) {
-            $this->renderFilesV2($torrent, $io, $input);
+            $this->renderFilesV2($torrent, $io);
         }
 
         return 0;
@@ -121,6 +121,7 @@ final class ShowCommand extends Command
             ->getIterator(skipPadFiles: !$input->getOption('show-pad-files'));
 
         $table = [];
+        $length = 0;
 
         foreach ($it as $file) {
             $table[] = [
@@ -129,9 +130,12 @@ final class ShowCommand extends Command
                 $file->sha1,
                 $file->attributes->attr,
             ];
+            $length += $file->length;
         }
 
         $io->table(['File', 'Size', 'SHA1', 'Attr'], $table);
+
+        $io->writeln("<comment>BitTorrent v1 content size:</comment> " . format_bytes($length));
     }
 
     private function renderFilesV2(TorrentFile $torrentFile, SymfonyStyle $io): void
@@ -145,6 +149,7 @@ final class ShowCommand extends Command
         );
 
         $table = [];
+        $length = 0;
 
         /** @var V2File|V2FileTree $leaf */
         foreach ($it as $leaf) {
@@ -156,6 +161,7 @@ final class ShowCommand extends Command
                     $leaf->piecesRoot,
                     $leaf->attributes->attr,
                 ];
+                $length += $leaf->length;
                 continue;
             }
 
@@ -167,5 +173,7 @@ final class ShowCommand extends Command
         }
 
         $io->table(['File', 'Size', 'Root Hash', 'Attr'], $table);
+
+        $io->writeln("<comment>BitTorrent v2 content size:</comment> " . format_bytes($length));
     }
 }
