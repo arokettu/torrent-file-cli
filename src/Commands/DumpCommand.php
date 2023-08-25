@@ -60,21 +60,36 @@ final class DumpCommand extends Command
             return;
         }
 
-        foreach ($replace as &$v) {
-            if (\is_array($v)) {
-                $this->replaceStrings($v, $handling);
+        // values
+        foreach ($replace as &$refV) {
+            if (\is_array($refV)) {
+                $this->replaceStrings($refV, $handling);
                 continue;
             }
-            if (\is_string($v)) {
-                $bin =
-                    \strlen($v) > 2048 || // handle strings over 2kb as binary
-                    preg_match('/[\x00-\x19]/', $v); // string contains chars below \x20 (space)
+            if (\is_string($refV)) {
+                $bin = !preg_match('//u', $refV);
 
                 if ($bin) {
-                    $v = match ($handling) {
-                        BinString::Base64 => 'base64(' . base64_encode($v) . ')',
-                        BinString::Minimal => '<binary string (' . \strlen($v) . ')>'
+                    $refV = match ($handling) {
+                        BinString::Base64 => 'base64(' . rtrim(base64_encode($refV), '=') . ')',
+                        BinString::Minimal => '<binary string (' . \strlen($refV) . ')>'
                     };
+                }
+            }
+        }
+
+        // keys
+        $index = 0;
+        foreach ($replace as $k => $v) {
+            if (\is_string($k)) {
+                $bin = !preg_match('//u', $k);
+                if ($bin) {
+                    $newK = match ($handling) {
+                        BinString::Base64 => 'base64(' . rtrim(base64_encode($k), '=') . ')',
+                        BinString::Minimal => '<binary string #' . $index++ . ' (' . \strlen($k) . ')>'
+                    };
+                    unset($replace[$k]);
+                    $replace[$newK] = $v;
                 }
             }
         }
