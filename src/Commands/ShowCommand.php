@@ -168,7 +168,7 @@ final class ShowCommand extends Command
             // handle dir
             $name = $leaf->path[array_key_last($leaf->path)];
             $table[] = [
-                str_repeat('  ', \count($leaf->path) - 1) . '/' . $name
+                str_repeat('  ', \count($leaf->path) - 1) . $name . '/'
             ];
         }
 
