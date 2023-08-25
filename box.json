@@ -1,0 +1,11 @@
+{
+    "main": "bin/torrent-file",
+    "output": "build/torrent-file.phar",
+    "chmod": "0755",
+    "compactors": [
+        "KevinGH\\Box\\Compactor\\Php"
+    ],
+    "dump-autoload": true,
+    "algorithm": "SHA512",
+    "git-version": "version"
+}
