@@ -54,7 +54,7 @@ sudo chmod +x /usr/local/bin/torrent-file
 
 Read full documentation here: <https://sandfox.dev/php/torrent-file-cli.html>
 
-Also on Read the Docs: <https://torrent-file.readthedocs.io/>
+Also on Read the Docs: <https://torrent-file-cli.readthedocs.io/>
 
 ## Support
 
