@@ -1,5 +1,5 @@
-Torrent File
-############
+Torrent File CLI
+################
 
 .. highlight:: bash
 

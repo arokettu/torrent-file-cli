@@ -9,6 +9,32 @@
 
 A CLI tool to manipulate torrent files.
 
+## Examples
+
+Create file:
+
+```bash
+torrent-file create ~/build/myapptoupload -o ~/build/myapptoupload.torrent 
+```
+
+Modify torrent fields:
+
+```bash
+torrent-file modify ~/build/myapptoupload.torrent --announce http://tracker
+```
+
+Inspect torrent file:
+
+```bash
+torrent-file show ~/build/myapptoupload.torrent
+```
+
+Dump raw torrent file structure:
+
+```bash
+torrent-file dump ~/build/myapptoupload.torrent
+```
+
 ## Installation
 
 Install for local user with composer:
@@ -23,6 +49,18 @@ Install globally by downloading prebuilt phar:
 sudo wget https://github.com/arokettu/torrent-file-cli/releases/latest/download/torrent-file.phar -O /usr/local/bin/torrent-file
 sudo chmod +x /usr/local/bin/torrent-file
 ```
+
+## Documentation
+
+Read full documentation here: <https://sandfox.dev/php/torrent-file-cli.html>
+
+Also on Read the Docs: <https://torrent-file.readthedocs.io/>
+
+## Support
+
+Please file issues on our main repo at GitLab: <https://gitlab.com/sandfox/torrent-file/-/issues>
+
+Feel free to ask any questions in our room on Gitter: <https://gitter.im/arokettu/community>
 
 ## License
 

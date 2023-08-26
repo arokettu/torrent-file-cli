@@ -10,9 +10,11 @@
         "homepage": "https://sandfox.me/",
         "role": "developer"
     }],
+    "homepage": "https://sandfox.dev/php/torrent-file-cli.html",
     "support": {
         "issues": "https://gitlab.com/sandfox/torrent-file-cli/-/issues",
         "source": "https://gitlab.com/sandfox/torrent-file-cli",
+        "docs": "https://torrent-file-cli.readthedocs.io/",
         "chat": "https://gitter.im/arokettu/community"
     },
     "config": {
