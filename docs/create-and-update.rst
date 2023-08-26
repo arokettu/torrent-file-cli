@@ -50,11 +50,11 @@ Torrent Modification
     torrent-file modify [-o|--output OUTPUT] [--name NAME] [--private|--no-private]
         [--comment COMMENT|--no-comment] [--created-by CREATED-BY|--no-created-by]
         [--creation-date CREATION-DATE|--no-creation-date] [--announce ANNOUNCE|--no-announce]
-        [--announce-list ANNOUNCE-LIST|--no-announce-list] [--] <path>
+        [--announce-list ANNOUNCE-LIST|--no-announce-list] [--] <file>
 
 Arguments:
 
-:command:`path`
+:command:`file`
     A path to a torrent file to be modified
 
 Options:

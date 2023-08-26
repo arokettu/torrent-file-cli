@@ -31,6 +31,8 @@ Documentation
    :maxdepth: 2
 
    create-and-update
+   show
+   dump
 
 License
 =======
