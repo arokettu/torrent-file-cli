@@ -22,7 +22,7 @@ final class DumpCommand extends Command
         $this->setName('dump');
         $this->setDescription('Dumps raw structure of the torrent file');
 
-        $this->addArgument('path', mode: InputArgument::REQUIRED);
+        $this->addArgument('file', mode: InputArgument::REQUIRED);
 
         $this->addOption(
             name: 'bin-strings',
@@ -41,7 +41,7 @@ final class DumpCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $data = Bencode::load(
-            $input->getArgument('path'),
+            $input->getArgument('file'),
             listType: Bencode\Collection::ARRAY,
             dictType: Bencode\Collection::ARRAY,
         );

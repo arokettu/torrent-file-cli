@@ -80,21 +80,24 @@ final class ShowCommand extends Command
 
         if (!($httpSeeds = $torrent->getHttpSeeds())->empty()) {
             $output->writeln("<comment>Http seed list:</comment>");
-            foreach ($httpSeeds as $httpSeed) {
+            foreach ($httpSeeds as $i => $httpSeed) {
+                $output->write(($i + 1) . '. ');
                 $output->writeln($httpSeed);
             }
         }
 
         if (!($urlList = $torrent->getUrlList())->empty()) {
             $output->writeln("<comment>Url list:</comment>");
-            foreach ($urlList as $url) {
+            foreach ($urlList as $i => $url) {
+                $output->write(($i + 1) . '. ');
                 $output->writeln($url);
             }
         }
 
         if (!($nodes = $torrent->getNodes())->empty()) {
             $output->writeln("<comment>Node list:</comment>");
-            foreach ($nodes as $node) {
+            foreach ($nodes as $i => $node) {
+                $output->write(($i + 1) . '. ');
                 $output->writeln("{$node->host}:{$node->port}");
             }
         }

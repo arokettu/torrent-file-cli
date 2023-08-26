@@ -20,7 +20,7 @@ final class ModifyCommand extends Command
         $this->setName('modify');
         $this->setDescription('Modify a torrent file');
 
-        $this->addArgument('path', mode: InputArgument::REQUIRED);
+        $this->addArgument('file', mode: InputArgument::REQUIRED);
         $this->addOption(
             'output',
             'o',
@@ -33,7 +33,7 @@ final class ModifyCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $path = $input->getArgument('path');
+        $path = $input->getArgument('file');
         if (is_file($path) === false || is_readable($path) === false) {
             throw new \RuntimeException('Not a readable path');
         }
