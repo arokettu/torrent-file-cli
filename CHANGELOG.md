@@ -2,6 +2,15 @@
 
 ## 1.x
 
+## 1.0.2
+
+*Oct 22, 2023*
+
+* PHAR:
+  * Update to torrent-file 5.0.3 to fix crashes on torrent files with symlinks
+* Composer:
+  * Allow Symfony 7
+
 ## 1.0.1
 
 *Oct 9, 2023*
