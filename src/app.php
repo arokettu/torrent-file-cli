@@ -19,4 +19,4 @@ $application->add(new DumpCommand());
 $application->add(new ModifyCommand());
 $application->add(new ShowCommand());
 
-$application->run();
+return $application;
