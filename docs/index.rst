@@ -32,6 +32,7 @@ Documentation
 
    create-and-update
    show
+   sign
    dump
 
 License
