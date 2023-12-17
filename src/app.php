@@ -6,6 +6,7 @@ use Arokettu\Torrent\CLI\Commands\CreateCommand;
 use Arokettu\Torrent\CLI\Commands\DumpCommand;
 use Arokettu\Torrent\CLI\Commands\ModifyCommand;
 use Arokettu\Torrent\CLI\Commands\ShowCommand;
+use Arokettu\Torrent\CLI\Commands\SignCommand;
 use Composer\InstalledVersions;
 use Symfony\Component\Console\Application;
 
@@ -18,5 +19,6 @@ $application->add(new CreateCommand());
 $application->add(new DumpCommand());
 $application->add(new ModifyCommand());
 $application->add(new ShowCommand());
+$application->add(new SignCommand());
 
 return $application;

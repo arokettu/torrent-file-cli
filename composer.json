@@ -39,14 +39,18 @@
         "composer-runtime-api": "^2.2",
         "arokettu/bencode": "^4.0",
         "arokettu/kilo-mega": "^1.0",
-        "arokettu/torrent-file": "^5.0",
+        "arokettu/torrent-file": "^5.2",
         "symfony/console": "^6.2 | ^7.0",
         "symfony/polyfill-intl-icu": "^1.28",
         "symfony/var-dumper": "^6.2 | ^7.0"
     },
     "require-dev": {
+        "ext-openssl": "*",
         "sandfox.dev/code-standard": "^1.2022.06.29",
         "squizlabs/php_codesniffer": "*",
         "vimeo/psalm": "^5.15"
+    },
+    "suggest": {
+        "ext-openssl": "for signature logic"
     }
 }
