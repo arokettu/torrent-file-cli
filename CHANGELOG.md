@@ -2,7 +2,13 @@
 
 ## 1.x
 
-## 1.0.2
+### 1.1.0
+
+*Dec 17, 2023*
+
+* Added ``sign`` command
+
+### 1.0.2
 
 *Oct 22, 2023*
 
@@ -11,13 +17,13 @@
 * Composer:
   * Allow Symfony 7
 
-## 1.0.1
+### 1.0.1
 
 *Oct 9, 2023*
 
 * Drop hard dependency on ext-intl
 
-## 1.0.0
+### 1.0.0
 
 *Aug 26, 2023*
 
