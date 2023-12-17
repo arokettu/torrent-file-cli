@@ -35,6 +35,12 @@ Dump raw torrent file structure:
 torrent-file dump ~/build/myapptoupload.torrent
 ```
 
+Sign torrent file:
+
+```bash
+torrent-file sign torrent.torrent key.pem cert.pem
+```
+
 ## Installation
 
 Install for local user with composer:
