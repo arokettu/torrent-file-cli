@@ -8,6 +8,8 @@ use Arokettu\Torrent\TorrentFile;
 use Arokettu\Torrent\TorrentFile\V2\File as V2File;
 use Arokettu\Torrent\TorrentFile\V2\FileTree as V2FileTree;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\TableCell;
+use Symfony\Component\Console\Helper\TableCellStyle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -118,7 +120,6 @@ final class ShowCommand extends Command
     private function renderFilesV1(TorrentFile $torrentFile, SymfonyStyle $io, InputInterface $input): void
     {
         $io->writeln("<comment>BitTorrent v1 info hash:</comment> " . $torrentFile->v1()->getInfoHash());
-        $io->writeln("<comment>BitTorrent v1 content:</comment>");
 
         $it = $torrentFile->v1()->getFiles()
             ->getIterator(skipPadFiles: !$input->getOption('show-pad-files'));
@@ -126,25 +127,27 @@ final class ShowCommand extends Command
         $table = [];
         $length = 0;
 
+        $alignRight = new TableCellStyle(['align' => 'right']);
+
         foreach ($it as $file) {
             $table[] = [
                 implode('/', $file->path),
-                format_bytes($file->length),
+                new TableCell(format_bytes($file->length, fixedWidth: true), ['style' => $alignRight]),
                 $file->sha1,
                 $file->attributes->attr,
             ];
             $length += $file->length;
         }
 
-        $io->table(['File', 'Size', 'SHA1', 'Attr'], $table);
-
         $io->writeln("<comment>BitTorrent v1 content size:</comment> " . format_bytes($length));
+
+        $io->writeln("<comment>BitTorrent v1 content:</comment>");
+        $io->table(['File', 'Size', 'SHA1', 'Attr'], $table);
     }
 
     private function renderFilesV2(TorrentFile $torrentFile, SymfonyStyle $io): void
     {
         $io->writeln("<comment>BitTorrent v2 info hash:</comment> " . $torrentFile->v2()->getInfoHash());
-        $io->writeln("<comment>BitTorrent v2 content:</comment>");
 
         $it = new \RecursiveIteratorIterator(
             $torrentFile->v2()->getFileTree(),
@@ -154,13 +157,15 @@ final class ShowCommand extends Command
         $table = [];
         $length = 0;
 
+        $alignRight = new TableCellStyle(['align' => 'right']);
+
         /** @var V2File|V2FileTree $leaf */
         foreach ($it as $leaf) {
             // handle file
             if ($leaf instanceof V2File) {
                 $table[] = [
                     str_repeat('  ', \count($leaf->path) - 1) . $leaf->name,
-                    format_bytes($leaf->length),
+                    new TableCell(format_bytes($leaf->length, fixedWidth: true), ['style' => $alignRight]),
                     $leaf->piecesRoot,
                     $leaf->attributes->attr,
                 ];
@@ -175,8 +180,9 @@ final class ShowCommand extends Command
             ];
         }
 
-        $io->table(['File', 'Size', 'Root Hash', 'Attr'], $table);
-
         $io->writeln("<comment>BitTorrent v2 content size:</comment> " . format_bytes($length));
+
+        $io->writeln("<comment>BitTorrent v2 content:</comment>");
+        $io->table(['File', 'Size', 'Root Hash', 'Attr'], $table);
     }
 }
