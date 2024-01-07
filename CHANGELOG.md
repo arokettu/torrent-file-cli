@@ -2,6 +2,12 @@
 
 ## 1.x
 
+### 1.1.1
+
+*Jan 7, 2024*
+
+* Updated file size rendering
+
 ### 1.1.0
 
 *Dec 17, 2023*
