@@ -24,6 +24,7 @@
         "platform": {
             "php": "8.1.17"
         },
+        "autoloader-suffix": "TorrentFileCLI",
         "sort-packages": true
     },
     "autoload": {

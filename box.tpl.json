@@ -5,6 +5,7 @@
     "compactors": [
         "KevinGH\\Box\\Compactor\\Php"
     ],
+    "alias": "torrent-file.phar",
     "dump-autoload": true,
     "algorithm": "SHA512",
     "git-version": "version"
