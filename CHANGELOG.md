@@ -2,6 +2,12 @@
 
 ## 1.x
 
+### 1.1.2
+
+*Apr 4, 2024*
+
+* Implemented reproducible build
+
 ### 1.1.1
 
 *Jan 7, 2024*
