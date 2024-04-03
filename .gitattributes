@@ -10,4 +10,5 @@
 /*.xml.dist         export-ignore
 
 # project
-/box.json*          export-ignore
+/sbin               export-ignore
+/box*.json          export-ignore
