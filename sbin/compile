@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+chdir(__DIR__ . '/..');
+
+$timestamp = trim(`git log -1 --format="%at"`);
+
+$data = json_decode(file_get_contents('box.tpl.json'), true);
+$data['timestamp'] = (new DateTime('@' . $timestamp))->format('c');
+file_put_contents('box.json', json_encode($data, JSON_PRETTY_PRINT));
+
+passthru('composer install');
+passthru('box compile');
+
+unlink('box.json');
