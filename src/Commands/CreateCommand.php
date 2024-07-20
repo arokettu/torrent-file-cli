@@ -80,8 +80,8 @@ final class CreateCommand extends Command
             pieceAlign: false, // pure v1 only
             detectExec: $input->getOption('detect-exec'),
             detectSymlinks: $input->getOption('detect-symlinks'),
+            createdBy: 'Torrent File CLI by Sand Fox https://gitlab.com/sandfox/torrent-file-cli',
         );
-        $torrent->setCreatedBy('Torrent File CLI by Sand Fox https://gitlab.com/sandfox/torrent-file-cli');
 
         $this->applyFields($input, $torrent);
 

@@ -40,14 +40,14 @@
         "composer-runtime-api": "^2.2",
         "arokettu/bencode": "^4.0",
         "arokettu/kilo-mega": "^1.1",
-        "arokettu/torrent-file": "^5.2",
+        "arokettu/torrent-file": "^5.3",
         "symfony/console": "^6.2 | ^7.0",
         "symfony/polyfill-intl-icu": "^1.28",
         "symfony/var-dumper": "^6.2 | ^7.0"
     },
     "require-dev": {
         "ext-openssl": "*",
-        "sandfox.dev/code-standard": "^1.2022.06.29",
+        "sandfox.dev/code-standard": "^1.2024.07.20",
         "squizlabs/php_codesniffer": "*",
         "vimeo/psalm": "^5.15"
     },
