@@ -9,6 +9,21 @@
 
 A CLI tool to manipulate torrent files.
 
+## Installation
+
+Install for local user with composer:
+
+```bash
+composer global require arokettu/torrent-file-cli
+```
+
+Install globally by downloading prebuilt phar:
+
+```bash
+sudo wget https://github.com/arokettu/torrent-file-cli/releases/latest/download/torrent-file.phar -O /usr/local/bin/torrent-file
+sudo chmod +x /usr/local/bin/torrent-file
+```
+
 ## Examples
 
 Create file:
@@ -39,21 +54,6 @@ Sign torrent file:
 
 ```bash
 torrent-file sign torrent.torrent key.pem cert.pem
-```
-
-## Installation
-
-Install for local user with composer:
-
-```bash
-composer global require arokettu/torrent-file-cli
-```
-
-Install globally by downloading prebuilt phar:
-
-```bash
-sudo wget https://github.com/arokettu/torrent-file-cli/releases/latest/download/torrent-file.phar -O /usr/local/bin/torrent-file
-sudo chmod +x /usr/local/bin/torrent-file
 ```
 
 ## Documentation
