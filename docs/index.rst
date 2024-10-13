@@ -5,7 +5,7 @@ Torrent File CLI
 
 |Packagist| |GitLab| |GitHub| |Bitbucket| |Gitea|
 
-A PHP Class to work with torrent files
+A CLI tool to manipulate torrent files.
 
 Installation
 ============
