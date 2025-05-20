@@ -34,8 +34,7 @@ final class ExportCommand extends Command
             mode: InputOption::VALUE_REQUIRED,
             description: <<<DESC
                 Output format [json|json5|xml]
-                It can be autodetected if output is specified, otherwise required.',
-
+                It can be autodetected if output is specified, otherwise required
                 DESC,
         );
         $this->addOption(
@@ -48,6 +47,12 @@ final class ExportCommand extends Command
 
                 DESC,
             default: 'hex',
+        );
+        $this->addOption(
+            name: 'pretty',
+            mode: InputOption::VALUE_NEGATABLE,
+            description: 'Pretty print the output (no effect on JSON5)',
+            default: false,
         );
     }
 
@@ -83,9 +88,9 @@ final class ExportCommand extends Command
         $binStrings->assertExport();
 
         match ($format) {
-            'json' => JsonExporter::export($path, $outputFile, $binStrings, false),
-            'json5' => JsonExporter::export($path, $outputFile, $binStrings, true),
-            'xml' => XmlExporter::export($path, $outputFile, $binStrings),
+            'json' => JsonExporter::export($path, $outputFile, $binStrings, false, $input->getOption('pretty')),
+            'json5' => JsonExporter::export($path, $outputFile, $binStrings, true, $input->getOption('pretty')),
+            'xml' => XmlExporter::export($path, $outputFile, $binStrings, $input->getOption('pretty')),
             default => throw new \RuntimeException(\sprintf('Unrecognized format: "%s".', $format)),
         };
 

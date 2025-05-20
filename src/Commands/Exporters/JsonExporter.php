@@ -12,8 +12,13 @@ use Arokettu\Torrent\CLI\Params\BinString;
 
 final class JsonExporter
 {
-    public static function export(string $inputFile, string $outputFile, BinString $binStrings, bool $json5): void
-    {
+    public static function export(
+        string $inputFile,
+        string $outputFile,
+        BinString $binStrings,
+        bool $json5,
+        bool $pretty,
+    ): void {
         $data = Bencode::load(
             $inputFile,
             listType: fn ($v) => new Json\JsonList($v, $binStrings),
@@ -31,14 +36,18 @@ final class JsonExporter
             'data' => new CommentDecorator($data, <<<TXT
                 Torrent file data goes here
                 All strings including keys must have prefixes:
-                ":" for the plain text (only if the string contains another ":")
-                "hex:" for hex encoded
-                "base64:" for base64 encoded
+                "|" for the plain text (required only if the string contains another "|")
+                "hex|" for hex encoded
+                "base64|" for base64 encoded
                 TXT),
         ];
 
         $h = fopen($outputFile, 'w');
-        fwrite($h, $json5 ? Json5Encoder::encode($json) : JsonEncoder::encode($json, JsonEncoder::ENCODE_PRETTY));
+        fwrite($h, $json5 ?
+            Json5Encoder::encode($json) :
+            JsonEncoder::encode($json, $pretty ?
+                JsonEncoder::ENCODE_PRETTY :
+                JSONEncoder::ENCODE_DEFAULT));
         fclose($h);
     }
 }

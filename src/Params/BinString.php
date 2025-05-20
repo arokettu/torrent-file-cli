@@ -44,8 +44,8 @@ enum BinString: string
         $text = preg_match('//u', $value);
 
         if ($text) {
-            if (str_contains($value, ':')) {
-                return ':' . $value;
+            if (str_contains($value, '|')) {
+                return '|' . $value;
             }
 
             return $value;
@@ -55,8 +55,8 @@ enum BinString: string
             BinString::Raw,
             BinString::Minimal,
                 => throw new \LogicException('Must not be used'),
-            BinString::Base64 => 'base64:' . rtrim(base64_encode($value), '='),
-            BinString::Hex => 'hex:' . bin2hex($value),
+            BinString::Base64 => 'base64|' . rtrim(base64_encode($value), '='),
+            BinString::Hex => 'hex|' . bin2hex($value),
         };
     }
 

@@ -10,7 +10,7 @@ use Sabre\Xml\Writer as XmlWriter;
 
 final class XmlExporter
 {
-    public static function export(string $inputFile, string $outputFile, BinString $binStrings): void
+    public static function export(string $inputFile, string $outputFile, BinString $binStrings, bool $pretty): void
     {
         $data = Bencode::load(
             $inputFile,
@@ -23,8 +23,10 @@ final class XmlExporter
             XML\XmlValue::NS_BARE => '',
         ];
         $writer->openMemory();
-        $writer->setIndent(true);
-        $writer->setIndentString('    ');
+        if ($pretty) {
+            $writer->setIndent(true);
+            $writer->setIndentString('    ');
+        }
         $writer->startDocument('1.0', 'UTF-8');
         $writer->write(new XML\XmlValue($data, $binStrings, filename: basename($inputFile)));
 
