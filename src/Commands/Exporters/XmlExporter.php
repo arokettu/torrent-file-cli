@@ -25,7 +25,7 @@ final class XmlExporter
         $writer->openMemory();
         $writer->setIndent(true);
         $writer->setIndentString('    ');
-        $writer->startDocument();
+        $writer->startDocument('1.0', 'UTF-8');
         $writer->write(new XML\XmlValue($data, $binStrings, filename: basename($inputFile)));
 
         $h = fopen($outputFile, 'w');
