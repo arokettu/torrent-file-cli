@@ -2,6 +2,10 @@
 
 ## 1.x
 
+### next
+
+* Hex encoding in dump
+
 ### 1.1.2
 
 *Apr 4, 2024*

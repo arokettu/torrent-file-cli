@@ -12,6 +12,7 @@ A command to dump all raw data from the torrent file.
     ``raw`` -- as VarExporter shows binary strings,
     ``minimal`` -- as ``<binary string (length)>`` (default),
     ``base64`` -- encoded in base64.
+    ``hex`` -- encoded in hexadecimal.
 
 Example::
 

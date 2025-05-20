@@ -28,10 +28,11 @@ final class DumpCommand extends Command
             name: 'bin-strings',
             mode: InputOption::VALUE_REQUIRED,
             description: <<<DESC
-                Binary strings [raw|minimal|base64]
+                Binary strings [raw|minimal|base64|hex]
                     - raw         Show raw strings as they are rendered by VarExporter
                     - minimal     Show <binary string (length)>
                     - base64      Encode to base64
+                    - hex         Encode to hexadecimal
 
                 DESC,
             default: 'minimal',
@@ -67,14 +68,7 @@ final class DumpCommand extends Command
                 continue;
             }
             if (\is_string($refV)) {
-                $bin = !preg_match('//u', $refV);
-
-                if ($bin) {
-                    $refV = match ($handling) {
-                        BinString::Base64 => 'base64(' . rtrim(base64_encode($refV), '=') . ')',
-                        BinString::Minimal => '<binary string (' . \strlen($refV) . ')>'
-                    };
-                }
+                $refV = BinString::encode($refV, $handling);
             }
         }
 
@@ -82,12 +76,8 @@ final class DumpCommand extends Command
         $index = 0;
         foreach ($replace as $k => $v) {
             if (\is_string($k)) {
-                $bin = !preg_match('//u', $k);
-                if ($bin) {
-                    $newK = match ($handling) {
-                        BinString::Base64 => 'base64(' . rtrim(base64_encode($k), '=') . ')',
-                        BinString::Minimal => '<binary string #' . $index++ . ' (' . \strlen($k) . ')>'
-                    };
+                $newK = BinString::encode($k, $handling);
+                if ($k !== $newK) {
                     unset($replace[$k]);
                     $replace[$newK] = $v;
                 }
