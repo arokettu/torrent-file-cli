@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arokettu\Torrent\CLI\Commands;
 
 use Arokettu\Torrent\CLI\Commands\Exporters\JsonExporter;
+use Arokettu\Torrent\CLI\Commands\Exporters\XmlExporter;
 use Arokettu\Torrent\CLI\Params\BinString;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -84,6 +85,7 @@ final class ExportCommand extends Command
         match ($format) {
             'json' => JsonExporter::export($path, $outputFile, $binStrings, false),
             'json5' => JsonExporter::export($path, $outputFile, $binStrings, true),
+            'xml' => XmlExporter::export($path, $outputFile, $binStrings),
             default => throw new \RuntimeException(\sprintf('Unrecognized format: "%s".', $format)),
         };
 

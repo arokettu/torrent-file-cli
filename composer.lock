@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d8eda7c8ac45c801b6c0d26471f6783",
+    "content-hash": "1cf881ff32d3f427cfc0c38baf7bfd96",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -534,6 +534,135 @@
                 "source": "https://github.com/php-fig/event-dispatcher/tree/1.0.0"
             },
             "time": "2019-01-08T18:20:26+00:00"
+        },
+        {
+            "name": "sabre/uri",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabre-io/uri.git",
+                "reference": "38eeab6ed9eec435a2188db489d4649c56272c51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabre-io/uri/zipball/38eeab6ed9eec435a2188db489d4649c56272c51",
+                "reference": "38eeab6ed9eec435a2188db489d4649c56272c51",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.64",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.12",
+                "phpstan/phpstan-phpunit": "^1.4",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/functions.php"
+                ],
+                "psr-4": {
+                    "Sabre\\Uri\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evert Pot",
+                    "email": "me@evertpot.com",
+                    "homepage": "http://evertpot.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Functions for making sense out of URIs.",
+            "homepage": "http://sabre.io/uri/",
+            "keywords": [
+                "rfc3986",
+                "uri",
+                "url"
+            ],
+            "support": {
+                "forum": "https://groups.google.com/group/sabredav-discuss",
+                "issues": "https://github.com/sabre-io/uri/issues",
+                "source": "https://github.com/fruux/sabre-uri"
+            },
+            "time": "2024-09-04T15:30:08+00:00"
+        },
+        {
+            "name": "sabre/xml",
+            "version": "4.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabre-io/xml.git",
+                "reference": "a89257fd188ce30e456b841b6915f27905dfdbe3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabre-io/xml/zipball/a89257fd188ce30e456b841b6915f27905dfdbe3",
+                "reference": "a89257fd188ce30e456b841b6915f27905dfdbe3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-xmlreader": "*",
+                "ext-xmlwriter": "*",
+                "lib-libxml": ">=2.6.20",
+                "php": "^7.4 || ^8.0",
+                "sabre/uri": ">=2.0,<4.0.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.64",
+                "phpstan/phpstan": "^1.12",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/Deserializer/functions.php",
+                    "lib/Serializer/functions.php"
+                ],
+                "psr-4": {
+                    "Sabre\\Xml\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evert Pot",
+                    "email": "me@evertpot.com",
+                    "homepage": "http://evertpot.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Markus Staab",
+                    "email": "markus.staab@redaxo.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "sabre/xml is an XML library that you may not hate.",
+            "homepage": "https://sabre.io/xml/",
+            "keywords": [
+                "XMLReader",
+                "XMLWriter",
+                "dom",
+                "xml"
+            ],
+            "support": {
+                "forum": "https://groups.google.com/group/sabredav-discuss",
+                "issues": "https://github.com/sabre-io/xml/issues",
+                "source": "https://github.com/fruux/sabre-xml"
+            },
+            "time": "2024-09-06T08:00:55+00:00"
         },
         {
             "name": "symfony/console",
