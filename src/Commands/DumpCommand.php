@@ -68,14 +68,14 @@ final class DumpCommand extends Command
                 continue;
             }
             if (\is_string($refV)) {
-                $refV = BinString::encode($refV, $handling);
+                $refV = $handling->encodeForDump($refV);
             }
         }
 
         // keys
         foreach ($replace as $k => $v) {
             if (\is_string($k)) {
-                $newK = BinString::encode($k, $handling);
+                $newK = $handling->encodeForDump($k);
                 if ($k !== $newK) {
                     unset($replace[$k]);
                     $replace[$newK] = $v;

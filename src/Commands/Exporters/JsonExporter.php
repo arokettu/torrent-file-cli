@@ -22,7 +22,7 @@ final class JsonExporter
 
         // handle the case when the entire data is a string
         if (\is_string($data)) {
-            $data = BinString::export($data, $binStrings);
+            $data = $binStrings->encodeForJson($data);
         }
 
         $json = [

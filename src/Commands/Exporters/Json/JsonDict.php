@@ -20,10 +20,10 @@ final class JsonDict implements JsonSerializable
     private function process(): Generator
     {
         foreach ($this->values as $key => $value) {
-            $key = BinString::export((string)$key, $this->binHandler);
+            $key = $this->binHandler->encodeForJson((string)$key);
 
             if (\is_string($value)) {
-                yield $key => BinString::export($value, $this->binHandler);
+                yield $key => $this->binHandler->encodeForJson($value);
             } else {
                 yield $key => $value;
             }

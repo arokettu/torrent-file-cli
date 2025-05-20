@@ -11,18 +11,7 @@ enum BinString: string
     case Base64 = 'base64';
     case Hex = 'hex';
 
-    public function doEncode(string $value): string
-    {
-        return match ($this) {
-            BinString::Raw => $value,
-            BinString::Minimal => '<binary string (len: ' . \strlen($value) .
-                ', hash: ' . hash('sha256', $value) . ')>',
-            BinString::Base64 => 'base64(' . rtrim(base64_encode($value), '=') . ')',
-            BinString::Hex => 'hex(' . bin2hex($value) . ')',
-        };
-    }
-
-    public static function encode(string $value, self $handler): string
+    public function encodeForDump(string $value): string
     {
         $text = preg_match('//u', $value);
 
@@ -30,7 +19,13 @@ enum BinString: string
             return $value;
         }
 
-        return $handler->doEncode($value);
+        return match ($this) {
+            BinString::Raw => $value,
+            BinString::Minimal => '<binary string (len: ' . \strlen($value) .
+                ', hash: ' . hash('sha256', $value) . ')>',
+            BinString::Base64 => 'base64(' . rtrim(base64_encode($value), '=') . ')',
+            BinString::Hex => 'hex(' . bin2hex($value) . ')',
+        };
     }
 
     public function assertExport(): void
@@ -44,18 +39,7 @@ enum BinString: string
         };
     }
 
-    public function doExport(string $value): string
-    {
-        return match ($this) {
-            BinString::Raw,
-            BinString::Minimal,
-                => throw new \LogicException('Must not be used'),
-            BinString::Base64 => 'base64:' . rtrim(base64_encode($value), '='),
-            BinString::Hex => 'hex:' . bin2hex($value),
-        };
-    }
-
-    public static function export(string $value, self $handler): string
+    public function encodeForJson(string $value): string
     {
         $text = preg_match('//u', $value);
 
@@ -67,6 +51,29 @@ enum BinString: string
             return $value;
         }
 
-        return $handler->doExport($value);
+        return match ($this) {
+            BinString::Raw,
+            BinString::Minimal,
+                => throw new \LogicException('Must not be used'),
+            BinString::Base64 => 'base64:' . rtrim(base64_encode($value), '='),
+            BinString::Hex => 'hex:' . bin2hex($value),
+        };
+    }
+
+    public function encodeForXml(string $value): array
+    {
+        $text = preg_match('//u', $value);
+
+        if ($text) {
+            return [null, $value];
+        }
+
+        return match ($this) {
+            BinString::Raw,
+            BinString::Minimal,
+                => throw new \LogicException('Must not be used'),
+            BinString::Base64 => ['base64', rtrim(base64_encode($value), '=')],
+            BinString::Hex => ['hex', bin2hex($value)],
+        };
     }
 }

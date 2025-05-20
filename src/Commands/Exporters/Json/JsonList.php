@@ -20,7 +20,7 @@ final class JsonList implements JsonSerializableAlias
     {
         foreach ($this->values as $value) {
             if (\is_string($value)) {
-                yield BinString::export($value, $this->binHandler);
+                yield $this->binHandler->encodeForJson($value);
             } else {
                 yield $value;
             }
