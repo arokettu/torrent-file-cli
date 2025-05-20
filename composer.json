@@ -47,9 +47,9 @@
     },
     "require-dev": {
         "ext-openssl": "*",
-        "sandfox.dev/code-standard": "^1.2024.07.20",
+        "sandfox.dev/code-standard": "^1.2025.05.07",
         "squizlabs/php_codesniffer": "*",
-        "vimeo/psalm": "^5.15"
+        "vimeo/psalm": "^6"
     },
     "suggest": {
         "ext-openssl": "for signature logic"

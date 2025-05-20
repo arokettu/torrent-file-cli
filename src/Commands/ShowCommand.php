@@ -47,10 +47,10 @@ final class ShowCommand extends Command
         }
 
         if (($comment = $torrent->getComment())) {
-            $output->writeln("<comment>Comment:</comment> " . $comment);
+            $output->writeln('<comment>Comment:</comment> ' . $comment);
         }
 
-        $output->writeln("<comment>Private:</comment> " . ($torrent->isPrivate() ? 'yes' : 'no'));
+        $output->writeln('<comment>Private:</comment> ' . ($torrent->isPrivate() ? 'yes' : 'no'));
 
         if (($date = $torrent->getCreationDate())) {
             $f = new \IntlDateFormatter(
@@ -58,19 +58,19 @@ final class ShowCommand extends Command
                 \IntlDateFormatter::MEDIUM,
                 \IntlDateFormatter::MEDIUM,
             );
-            $output->writeln("<comment>Created on:</comment> " . $f->format($date) . ' UTC');
+            $output->writeln('<comment>Created on:</comment> ' . $f->format($date) . ' UTC');
         }
 
         if (($createdBy = $torrent->getCreatedBy())) {
-            $output->writeln("<comment>Created by:</comment> " . $createdBy);
+            $output->writeln('<comment>Created by:</comment> ' . $createdBy);
         }
 
         if (($announce = $torrent->getAnnounce())) {
-            $output->writeln("<comment>Tracker:</comment> " . $announce);
+            $output->writeln('<comment>Tracker:</comment> ' . $announce);
         }
 
         if (!($announceList = $torrent->getAnnounceList())->empty()) {
-            $output->writeln("<comment>Tracker list:</comment>");
+            $output->writeln('<comment>Tracker list:</comment>');
             foreach ($announceList as $i => $tier) {
                 $output->write(($i + 1) . '. ');
                 foreach ($tier as $ii => $tracker) {
@@ -81,7 +81,7 @@ final class ShowCommand extends Command
         }
 
         if (!($httpSeeds = $torrent->getHttpSeeds())->empty()) {
-            $output->writeln("<comment>Http seed list:</comment>");
+            $output->writeln('<comment>Http seed list:</comment>');
             foreach ($httpSeeds as $i => $httpSeed) {
                 $output->write(($i + 1) . '. ');
                 $output->writeln($httpSeed);
@@ -89,7 +89,7 @@ final class ShowCommand extends Command
         }
 
         if (!($urlList = $torrent->getUrlList())->empty()) {
-            $output->writeln("<comment>Url list:</comment>");
+            $output->writeln('<comment>Url list:</comment>');
             foreach ($urlList as $i => $url) {
                 $output->write(($i + 1) . '. ');
                 $output->writeln($url);
@@ -97,14 +97,14 @@ final class ShowCommand extends Command
         }
 
         if (!($nodes = $torrent->getNodes())->empty()) {
-            $output->writeln("<comment>Node list:</comment>");
+            $output->writeln('<comment>Node list:</comment>');
             foreach ($nodes as $i => $node) {
                 $output->write(($i + 1) . '. ');
                 $output->writeln("{$node->host}:{$node->port}");
             }
         }
 
-        $output->writeln("<comment>Magnet link:</comment> " . $torrent->getMagnetLink());
+        $output->writeln('<comment>Magnet link:</comment> ' . $torrent->getMagnetLink());
 
         if ($torrent->v1()) {
             $this->renderFilesV1($torrent, $io, $input);
@@ -119,7 +119,7 @@ final class ShowCommand extends Command
 
     private function renderFilesV1(TorrentFile $torrentFile, SymfonyStyle $io, InputInterface $input): void
     {
-        $io->writeln("<comment>BitTorrent v1 info hash:</comment> " . $torrentFile->v1()->getInfoHash());
+        $io->writeln('<comment>BitTorrent v1 info hash:</comment> ' . $torrentFile->v1()->getInfoHash());
 
         $it = $torrentFile->v1()->getFiles()
             ->getIterator(skipPadFiles: !$input->getOption('show-pad-files'));
@@ -139,15 +139,15 @@ final class ShowCommand extends Command
             $length += $file->length;
         }
 
-        $io->writeln("<comment>BitTorrent v1 content size:</comment> " . format_bytes($length));
+        $io->writeln('<comment>BitTorrent v1 content size:</comment> ' . format_bytes($length));
 
-        $io->writeln("<comment>BitTorrent v1 content:</comment>");
+        $io->writeln('<comment>BitTorrent v1 content:</comment>');
         $io->table(['File', 'Size', 'SHA1', 'Attr'], $table);
     }
 
     private function renderFilesV2(TorrentFile $torrentFile, SymfonyStyle $io): void
     {
-        $io->writeln("<comment>BitTorrent v2 info hash:</comment> " . $torrentFile->v2()->getInfoHash());
+        $io->writeln('<comment>BitTorrent v2 info hash:</comment> ' . $torrentFile->v2()->getInfoHash());
 
         $it = new \RecursiveIteratorIterator(
             $torrentFile->v2()->getFileTree(),
@@ -180,9 +180,9 @@ final class ShowCommand extends Command
             ];
         }
 
-        $io->writeln("<comment>BitTorrent v2 content size:</comment> " . format_bytes($length));
+        $io->writeln('<comment>BitTorrent v2 content size:</comment> ' . format_bytes($length));
 
-        $io->writeln("<comment>BitTorrent v2 content:</comment>");
+        $io->writeln('<comment>BitTorrent v2 content:</comment>');
         $io->table(['File', 'Size', 'Root Hash', 'Attr'], $table);
     }
 }
