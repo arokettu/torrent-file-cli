@@ -32,4 +32,41 @@ enum BinString: string
 
         return $handler->doEncode($value);
     }
+
+    public function assertExport(): void
+    {
+        match ($this) {
+            BinString::Base64,
+            BinString::Hex,
+                => null,
+            default
+                => throw new \RuntimeException('Export does not support ' . $this->value . ' binary strings'),
+        };
+    }
+
+    public function doExport(string $value): string
+    {
+        return match ($this) {
+            BinString::Raw,
+            BinString::Minimal,
+                => throw new \LogicException('Must not be used'),
+            BinString::Base64 => 'base64:' . rtrim(base64_encode($value), '='),
+            BinString::Hex => 'hex:' . bin2hex($value),
+        };
+    }
+
+    public static function export(string $value, self $handler): string
+    {
+        $text = preg_match('//u', $value);
+
+        if ($text) {
+            if (str_contains($value, ':')) {
+                return ':' . $value;
+            }
+
+            return $value;
+        }
+
+        return $handler->doExport($value);
+    }
 }

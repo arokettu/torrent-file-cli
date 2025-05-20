@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f3928406fc9b5b3dd3fbde430230f67",
+    "content-hash": "9d8eda7c8ac45c801b6c0d26471f6783",
     "packages": [
         {
             "name": "arokettu/bencode",
-            "version": "4.3.0",
+            "version": "4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arokettu/bencode.git",
-                "reference": "be43c5c2d54fb2c8a358f6d38130fc7e57928913"
+                "reference": "0955a7037670c24d5ae5fdafe5ff5894aba024e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/bencode/zipball/be43c5c2d54fb2c8a358f6d38130fc7e57928913",
-                "reference": "be43c5c2d54fb2c8a358f6d38130fc7e57928913",
+                "url": "https://api.github.com/repos/arokettu/bencode/zipball/0955a7037670c24d5ae5fdafe5ff5894aba024e7",
+                "reference": "0955a7037670c24d5ae5fdafe5ff5894aba024e7",
                 "shasum": ""
             },
             "require": {
@@ -33,12 +33,13 @@
                 "pear/math_biginteger": "^1.0",
                 "phpunit/phpunit": "^10.5.28",
                 "psy/psysh": "*",
-                "sandfox.dev/code-standard": "^1.2024.07.05",
+                "sandfox.dev/code-standard": "^1.2025.05.07",
                 "squizlabs/php_codesniffer": "*",
-                "vimeo/psalm": "^5.2"
+                "vimeo/psalm": "^6"
             },
             "suggest": {
                 "brick/math": "In case you need integers larger than your architecture supports",
+                "ext-bcmath": "In case you need integers larger than your architecture supports (PHP 8.4 or later)",
                 "ext-gmp": "In case you need integers larger than your architecture supports",
                 "pear/math_biginteger": "In case you need integers larger than your architecture supports",
                 "php-64bit": "Running 64 bit is recommended to prevent integer overflow"
@@ -75,7 +76,7 @@
                 "issues": "https://gitlab.com/sandfox/bencode/-/issues",
                 "source": "https://gitlab.com/sandfox/bencode"
             },
-            "time": "2024-09-25T14:43:35+00:00"
+            "time": "2025-05-20T19:25:23+00:00"
         },
         {
             "name": "arokettu/is-resource",
@@ -137,6 +138,123 @@
                 "source": "https://gitlab.com/sandfox/is-resource"
             },
             "time": "2024-08-27T04:34:45+00:00"
+        },
+        {
+            "name": "arokettu/json",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arokettu/php-json.git",
+                "reference": "13954e6b4e7a78a936af2c90adc7022dc4c639b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arokettu/php-json/zipball/13954e6b4e7a78a936af2c90adc7022dc4c639b8",
+                "reference": "13954e6b4e7a78a936af2c90adc7022dc4c639b8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^8.0",
+                "symfony/polyfill-php83": "^1.27"
+            },
+            "require-dev": {
+                "laminas/laminas-code": "^4.7.1",
+                "phpunit/phpunit": "^9.6.15",
+                "psy/psysh": "*",
+                "sandfox.dev/code-standard": "^1.2023.06.29",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Arokettu\\Json\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Smirnov",
+                    "email": "sandfox@sandfox.me",
+                    "homepage": "https://sandfox.me/",
+                    "role": "developer"
+                }
+            ],
+            "description": "ext-json wrapper with sane defaults",
+            "homepage": "https://sandfox.dev/php/json.html",
+            "keywords": [
+                "json"
+            ],
+            "support": {
+                "docs": "https://arokettu-json.readthedocs.io/",
+                "issues": "https://gitlab.com/sandfox/php-json/-/issues",
+                "source": "https://gitlab.com/sandfox/php-json"
+            },
+            "time": "2023-12-04T18:29:17+00:00"
+        },
+        {
+            "name": "arokettu/json5-builder",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arokettu/json5-builder.git",
+                "reference": "c944438129f98cd98a516fa29f2afd9cd125b78b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arokettu/json5-builder/zipball/c944438129f98cd98a516fa29f2afd9cd125b78b",
+                "reference": "c944438129f98cd98a516fa29f2afd9cd125b78b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "arokettu/json": "^2.1",
+                "colinodell/json5": "^3.0",
+                "phpunit/phpunit": "^10.5",
+                "psy/psysh": "*",
+                "sandfox.dev/code-standard": "^1.2025.05.07",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Arokettu\\Json5\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Smirnov",
+                    "email": "sandfox+composer@sandfox.me",
+                    "homepage": "https://sandfox.me/",
+                    "role": "developer"
+                }
+            ],
+            "description": "JSON5 config builder/encoder",
+            "homepage": "https://sandfox.dev/php/json5-builder.html",
+            "keywords": [
+                "JSON5",
+                "builder",
+                "config",
+                "configuration",
+                "encode"
+            ],
+            "support": {
+                "chat": "https://gitter.im/arokettu/community",
+                "docs": "https://json5-builder.readthedocs.io/",
+                "issues": "https://gitlab.com/sandfox/json5-builder/-/issues",
+                "source": "https://gitlab.com/sandfox/json5-builder"
+            },
+            "time": "2025-05-13T15:29:29+00:00"
         },
         {
             "name": "arokettu/kilo-mega",
@@ -1110,6 +1228,82 @@
                 }
             ],
             "time": "2024-12-23T08:48:59+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php83",
+            "version": "v1.32.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php83.git",
+                "reference": "2fb86d65e2d424369ad2905e83b236a8805ba491"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php83/zipball/2fb86d65e2d424369ad2905e83b236a8805ba491",
+                "reference": "2fb86d65e2d424369ad2905e83b236a8805ba491",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php83\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.3+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php83/tree/v1.32.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/service-contracts",

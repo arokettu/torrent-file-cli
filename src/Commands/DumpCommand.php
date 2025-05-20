@@ -73,7 +73,6 @@ final class DumpCommand extends Command
         }
 
         // keys
-        $index = 0;
         foreach ($replace as $k => $v) {
             if (\is_string($k)) {
                 $newK = BinString::encode($k, $handling);
