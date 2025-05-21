@@ -15,7 +15,6 @@ final class XmlValue implements XmlSerializable
     public function __construct(
         private readonly mixed $value,
         private readonly BinString $binHandler,
-        private readonly string|null $key = null,
         private readonly string|null $filename = null,
     ) {
     }
@@ -27,13 +26,6 @@ final class XmlValue implements XmlSerializable
 
         if ($this->filename) {
             $xml['attributes']['file'] = $this->filename;
-        }
-        if ($this->key !== null) {
-            [$encoding, $key] = $this->binHandler->encodeForXml($this->key);
-            $xml['attributes'] = ['key' => $key, ...$xml['attributes']]; // make key always first
-            if ($encoding !== null) {
-                $xml['attributes']['key-encoding'] = $encoding;
-            }
         }
 
         $writer->write($xml);
@@ -72,7 +64,9 @@ final class XmlValue implements XmlSerializable
     {
         $xml = ['name' => XmlExporter::CLARK_NAMESPACE . 'str'];
         [$encoding, $string] = $this->binHandler->encodeForXml($this->value);
-        $xml['value'] = $string;
+        if ($string !== '') {
+            $xml['value'] = $string;
+        }
         if ($encoding !== null) {
             $xml['attributes']['encoding'] = $encoding;
         }
@@ -103,7 +97,10 @@ final class XmlValue implements XmlSerializable
 
                 // encode key
                 [$encoding, $key] = $this->binHandler->encodeForXml($k);
-                $xmlKey = ['name' => 'key', 'value' => $key];
+                $xmlKey = ['name' => 'key'];
+                if ($key !== '') {
+                    $xmlKey['value'] = $key;
+                }
                 if ($encoding !== null) {
                     $xmlKey['attributes']['encoding'] = $encoding;
                 }
