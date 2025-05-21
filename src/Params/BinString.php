@@ -45,7 +45,7 @@ enum BinString: string
 
         if ($text) {
             if (str_contains($value, '|')) {
-                return '|' . $value;
+                return 'plain|' . $value;
             }
 
             return $value;
@@ -74,6 +74,31 @@ enum BinString: string
                 => throw new \LogicException('Must not be used'),
             BinString::Base64 => ['base64', rtrim(base64_encode($value), '=')],
             BinString::Hex => ['hex', bin2hex($value)],
+        };
+    }
+
+    public static function decodeFromJson(string $value): string
+    {
+        if (!str_contains($value, '|')) {
+            return $value;
+        }
+
+        [$format, $string] = explode('|', $value, 2);
+
+        if ($format === 'plain') {
+            return $string;
+        }
+
+        // remove json-acceptable whitespace from the encoded values
+        $string = preg_replace('/[\x20\x09\x0a\x0d]/', '', $string);
+
+        return match ($format) {
+            'hex' => hex2bin($string) ?:
+                throw new \RuntimeException(\sprintf('Invalid hex string: "%s"', $string)),
+            'base64' => base64_decode($string) ?:
+                throw new \RuntimeException(\sprintf('Invalid base64 string: "%s"', $string)),
+            default =>
+                throw new \RuntimeException(\sprintf('Unknown format: "%s". Probably an unescaped "|"', $value)),
         };
     }
 }

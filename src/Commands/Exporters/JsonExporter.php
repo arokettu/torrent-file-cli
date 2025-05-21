@@ -12,6 +12,8 @@ use Arokettu\Torrent\CLI\Params\BinString;
 
 final class JsonExporter
 {
+    public const SCHEMA = 'https://data.arokettu.dev/json/torrent-file-v1.json';
+
     public static function export(
         string $inputFile,
         string $outputFile,
@@ -31,12 +33,14 @@ final class JsonExporter
         }
 
         $json = [
-            '$schema' => 'https://data.arokettu.dev/json/torrent-file-v1.json',
-            'file' => basename($inputFile),
+            '$schema' => self::SCHEMA,
+            // In UNIX filename can contain a backslash
+            // Replace it for Windows users' safety
+            'file' => str_replace('\\', '_', basename($inputFile)),
             'data' => new CommentDecorator($data, <<<TXT
                 Torrent file data goes here
-                All strings including keys must have prefixes:
-                "|" for the plain text (required only if the string contains another "|")
+                All strings, including keys, must have prefixes:
+                "plain|" for the plain text (required only if the string contains another "|")
                 "hex|" for hex encoded
                 "base64|" for base64 encoded
                 TXT),

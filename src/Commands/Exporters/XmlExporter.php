@@ -17,6 +17,7 @@ final class XmlExporter
             listType: Bencode\Collection::ARRAY,
             dictType: Bencode\Collection::ARRAY_OBJECT,
         );
+        $filename = str_replace('\\', '_', basename($inputFile));
 
         $writer = new XmlWriter();
         $writer->namespaceMap = [
@@ -28,7 +29,7 @@ final class XmlExporter
             $writer->setIndentString('    ');
         }
         $writer->startDocument('1.0', 'UTF-8');
-        $writer->write(new XML\XmlValue($data, $binStrings, filename: basename($inputFile)));
+        $writer->write(new XML\XmlValue($data, $binStrings, filename: $filename));
 
         $h = fopen($outputFile, 'w');
         fwrite($h, $writer->outputMemory());

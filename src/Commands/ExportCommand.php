@@ -18,7 +18,7 @@ final class ExportCommand extends Command
     protected function configure(): void
     {
         $this->setName('export');
-        $this->setDescription('Export bencoded data into human-readable format');
+        $this->setDescription('Export bencoded data into a human-readable format');
 
         $this->addArgument('file', mode: InputArgument::REQUIRED);
 
