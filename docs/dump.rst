@@ -1,11 +1,14 @@
 Raw Dump
 ########
 
+.. note::
+    This command is mostly for debug purpose, if you need an exact data dump, see :ref:`torrent_file_cli_export_import`
+
 A command to dump all raw data from the torrent file.
 
 .. code-block:: sh
 
-    torrent-file dump [--bin-strings BIN-STRINGS] [--] <file>
+    torrent-file dump [--bin-strings=BIN-STRINGS] [--] <file>
 
 --bin-strings BIN-STRINGS
     Display binary strings as:

@@ -18,14 +18,14 @@ Torrent Creation
 
 Arguments:
 
-:command:`path`
-    A path to a directory or a file to be put in torrent
+path
+        A path to a directory or a file to be put in torrent
 
 Options:
 
---output, -o OUTPUT
+--output OUTPUT, -o OUTPUT
         A path to the torrent file to be created, if not specified, ``.torrent`` will be added to the ``path``
---metadata-version
+--metadata-version METADATA-VERSION
         Version of the torrent file to create.
         ``1`` for a version 1 torrent, still the most widely used.
         ``2`` for a version 2 torrent, relatively new and not widely supported yet.

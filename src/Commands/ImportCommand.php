@@ -19,7 +19,7 @@ final class ImportCommand extends Command
         $this->setName('import');
         $this->setDescription('Import bencoded data from a human-readable format');
 
-        $this->addArgument('file', mode: InputArgument::OPTIONAL);
+        $this->addArgument('file', mode: InputArgument::OPTIONAL, description: 'If omitted, STDIN will be read');
 
         $this->addOption(
             'output',
@@ -32,7 +32,7 @@ final class ImportCommand extends Command
             'f',
             mode: InputOption::VALUE_REQUIRED,
             description: <<<DESC
-                Output format [json|json5|xml]
+                Input format [json|json5|xml]
                 It can be autodetected if an input file is specified, otherwise required
                 DESC,
         );
