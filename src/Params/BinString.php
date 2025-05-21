@@ -35,7 +35,7 @@ enum BinString: string
             BinString::Hex,
                 => null,
             default
-                => throw new \RuntimeException('Export does not support ' . $this->value . ' binary strings'),
+                => throw new \RuntimeException('Export and import do not support ' . $this->value . ' binary strings'),
         };
     }
 
@@ -77,6 +77,21 @@ enum BinString: string
         };
     }
 
+    public function decode(string $value): string
+    {
+        $value = preg_replace('/[\s\t\r\n]/', '', $value);
+
+        return match ($this) {
+            BinString::Raw,
+            BinString::Minimal,
+                => throw new \LogicException('Must not be used'),
+            BinString::Base64 => base64_decode($value)
+                ?: throw new \RuntimeException(\sprintf('Invalid base64 string: "%s"', $value)),
+            BinString::Hex => hex2bin($value)
+                ?: throw new \RuntimeException(\sprintf('Invalid hex string: "%s"', $value)),
+        };
+    }
+
     public static function decodeFromJson(string $value): string
     {
         if (!str_contains($value, '|')) {
@@ -89,16 +104,10 @@ enum BinString: string
             return $string;
         }
 
-        // remove json-acceptable whitespace from the encoded values
-        $string = preg_replace('/[\x20\x09\x0a\x0d]/', '', $string);
+        $encoding = BinString::tryFrom($format) ??
+            throw new \RuntimeException(\sprintf('Unknown format: "%s". Probably an unescaped "|"', $value));
+        $encoding->assertExport();
 
-        return match ($format) {
-            'hex' => hex2bin($string) ?:
-                throw new \RuntimeException(\sprintf('Invalid hex string: "%s"', $string)),
-            'base64' => base64_decode($string) ?:
-                throw new \RuntimeException(\sprintf('Invalid base64 string: "%s"', $string)),
-            default =>
-                throw new \RuntimeException(\sprintf('Unknown format: "%s". Probably an unescaped "|"', $value)),
-        };
+        return $encoding->decode($string);
     }
 }

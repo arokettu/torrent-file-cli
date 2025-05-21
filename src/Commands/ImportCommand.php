@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arokettu\Torrent\CLI\Commands;
 
 use Arokettu\Torrent\CLI\Commands\Importers\JsonImporter;
+use Arokettu\Torrent\CLI\Commands\Importers\XmlImporter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -65,7 +66,7 @@ final class ImportCommand extends Command
 
         match ($format) {
             'json', 'json5' => JsonImporter::import($path, $outputFile),
-//            'xml' => XmlExporter::export($path, $outputFile, $binStrings, $input->getOption('pretty')),
+            'xml' => XmlImporter::import($path, $outputFile),
             default => throw new \RuntimeException(\sprintf('Unrecognized format: "%s".', $format)),
         };
 

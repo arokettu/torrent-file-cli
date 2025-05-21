@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arokettu\Torrent\CLI\Commands\Exporters\XML;
 
+use Arokettu\Torrent\CLI\Commands\Exporters\XmlExporter;
 use Arokettu\Torrent\CLI\Params\BinString;
 use ArrayObject;
 use Sabre\Xml\Writer;
@@ -11,9 +12,6 @@ use Sabre\Xml\XmlSerializable;
 
 final class XmlValue implements XmlSerializable
 {
-    public const NS_BARE = 'https://data.arokettu.dev/xml/bencode-v1.xml';
-    private const NS = '{' . self::NS_BARE . '}';
-
     public function __construct(
         private readonly mixed $value,
         private readonly BinString $binHandler,
@@ -65,14 +63,14 @@ final class XmlValue implements XmlSerializable
     private function encodeInteger(): array
     {
         return [
-            'name' => self::NS . 'int',
+            'name' => XmlExporter::CLARK_NAMESPACE . 'int',
             'value' => $this->value,
         ];
     }
 
     private function encodeString(): array
     {
-        $xml = ['name' => self::NS . 'str'];
+        $xml = ['name' => XmlExporter::CLARK_NAMESPACE . 'str'];
         [$encoding, $string] = $this->binHandler->encodeForXml($this->value);
         $xml['value'] = $string;
         if ($encoding !== null) {
@@ -84,7 +82,7 @@ final class XmlValue implements XmlSerializable
     private function encodeList(): array
     {
         return [
-            'name' => self::NS . 'list',
+            'name' => XmlExporter::CLARK_NAMESPACE . 'list',
             'value' => array_map(function ($v) {
                 return new self($v, $this->binHandler);
             }, $this->value),
@@ -96,7 +94,7 @@ final class XmlValue implements XmlSerializable
         $array = $this->value->getArrayCopy();
 
         return [
-            'name' => self::NS . 'dict',
+            'name' => XmlExporter::CLARK_NAMESPACE . 'dict',
             'value' => array_map(function ($k, $v) {
                 $xml = [
                     'name' => 'item',

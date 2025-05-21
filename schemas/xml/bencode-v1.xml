@@ -13,13 +13,55 @@
     <xs:complexType name="xml-string">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attributeGroup ref="common-attributes"/>
                 <xs:attributeGroup ref="string-attributes"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
 
-    <xs:element name="str" type="xml-string"/>
+    <!-- TODO: can't make it work for some reason
+        <xs:complexType name="xml-string-base64">
+            <xs:simpleContent>
+                <xs:extension base="xs:base64Binary">
+                    <xs:attributeGroup ref="common-attributes"/>
+                    <xs:attributeGroup ref="string-attributes"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+
+        <xs:complexType name="xml-string-hex">
+            <xs:simpleContent>
+                <xs:extension base="xs:hexBinary">
+                    <xs:attributeGroup ref="common-attributes"/>
+                    <xs:attributeGroup ref="string-attributes"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+
+        <xs:element name="str">
+            <xs:alternative test="@encoding = 'base64'" type="xml-string-base64"/>
+            <xs:alternative test="@encoding = 'hex'" type="xml-string-hex"/>
+            <xs:alternative type="xml-string"/>
+        </xs:element>
+
+        <xs:element name="key">
+            <xs:alternative test="@encoding = 'base64'" type="xml-string-base64"/>
+            <xs:alternative test="@encoding = 'hex'" type="xml-string-hex"/>
+            <xs:alternative type="xml-string"/>
+        </xs:element>
+    -->
+
+    <!-- simpler key and str -->
+
+    <xs:element name="str">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xml-string">
+                    <xs:attributeGroup ref="common-attributes"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="key" type="xml-string"/>
 
     <xs:element name="list">
         <xs:complexType>
@@ -57,22 +99,6 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
-    <xs:element name="key" type="xml-string"/>
-
-<!--    <xs:element name="dict">-->
-<!--        <xs:complexType>-->
-<!--            <xs:sequence>-->
-<!--                <xs:choice minOccurs="0" maxOccurs="unbounded">-->
-<!--                    <xs:element ref="int"/>-->
-<!--                    <xs:element ref="str"/>-->
-<!--                    <xs:element ref="list"/>-->
-<!--                    <xs:element ref="dict"/>-->
-<!--                </xs:choice>-->
-<!--            </xs:sequence>-->
-<!--            <xs:attributeGroup ref="common-attributes"/>-->
-<!--        </xs:complexType>-->
-<!--    </xs:element>-->
 
     <xs:simpleType name="encoding-enum">
         <xs:restriction base="xs:string">
