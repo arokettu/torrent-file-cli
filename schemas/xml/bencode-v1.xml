@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://data.arokettu.dev/xml/bencode-v1.xml" version="1.1" xmlns="https://data.arokettu.dev/xml/bencode-v1.xml">
+    <xs:element name="int">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:integer">
+                    <xs:attributeGroup ref="common-attributes"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="str">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attributeGroup ref="common-attributes"/>
+                    <xs:attributeGroup ref="string-attributes"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="list">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="int"/>
+                    <xs:element ref="str"/>
+                    <xs:element ref="list"/>
+                    <xs:element ref="dict"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attributeGroup ref="common-attributes"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="dict">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="int"/>
+                    <xs:element ref="str"/>
+                    <xs:element ref="list"/>
+                    <xs:element ref="dict"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attributeGroup ref="common-attributes"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="encoding-enum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="base64"/>
+            <xs:enumeration value="hex"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:attributeGroup name="string-attributes">
+        <xs:attribute name="encoding" type="encoding-enum"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="common-attributes">
+        <xs:attribute name="key" type="xs:string"/>
+        <xs:attribute name="key-encoding" type="encoding-enum"/>
+        <xs:attribute name="file" type="xs:string"/>
+    </xs:attributeGroup>
+</xs:schema>

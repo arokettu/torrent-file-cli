@@ -1,0 +1,28 @@
+// v1.0.0
+{
+    $schema: "https://json-schema.org/draft/2020-12/schema",
+    $id: "https://data.arokettu.dev/json/torrent-file-v1.json",
+    title: "JSON Torrent File",
+    description: "arokettu/torrent-file-cli JSON export",
+    source: "https://data.arokettu.dev/json/torrent-file-v1.json5",
+    type: "object",
+    properties: {
+        file: {
+            description: "File name",
+            type: "string",
+        },
+        data: {
+            description: "Bencode dictionary content",
+            type: "object",
+            properties: {
+                // just bare minimum
+                info: {
+                    description: "Main torrent data",
+                    type: "object",
+                },
+            },
+            required: ["info"],
+        },
+    },
+    required: ["data"],
+}
