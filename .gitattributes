@@ -12,3 +12,4 @@
 # project
 /sbin               export-ignore
 /box*.json          export-ignore
+/schemas            export-ignore

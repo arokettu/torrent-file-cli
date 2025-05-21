@@ -98,7 +98,22 @@ final class XmlValue implements XmlSerializable
         return [
             'name' => self::NS . 'dict',
             'value' => array_map(function ($k, $v) {
-                return new self($v, $this->binHandler, key: $k);
+                $xml = [
+                    'name' => 'item',
+                    'value' => [],
+                ];
+
+                // encode key
+                [$encoding, $key] = $this->binHandler->encodeForXml($k);
+                $xmlKey = ['name' => 'key', 'value' => $key];
+                if ($encoding !== null) {
+                    $xmlKey['attributes']['encoding'] = $encoding;
+                }
+                $xml['value'][] = $xmlKey;
+
+                // encode value
+                $xml['value'][] = new self($v, $this->binHandler);
+                return $xml;
             }, array_keys($array), array_values($array)),
         ];
     }
