@@ -2,8 +2,11 @@
 
 ## 1.x
 
-### next
+### 1.2.0
 
+*May 21, 2025*
+
+* Export/import commands
 * Hex encoding in dump
 
 ### 1.1.2
