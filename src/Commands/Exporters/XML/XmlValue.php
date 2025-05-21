@@ -71,7 +71,7 @@ final class XmlValue implements XmlSerializable
 
     private function encodeString(): array
     {
-        $xml = ['name' => self::NS . 'string'];
+        $xml = ['name' => self::NS . 'str'];
         [$encoding, $string] = $this->binHandler->encodeForXml($this->value);
         $xml['value'] = $string;
         if ($encoding !== null) {
