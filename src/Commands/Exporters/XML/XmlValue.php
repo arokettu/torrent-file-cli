@@ -25,13 +25,14 @@ final class XmlValue implements XmlSerializable
     public function xmlSerialize(Writer $writer): void
     {
         $xml = $this->encodeValue();
+        $xml['attributes'] ??= [];
 
         if ($this->filename) {
             $xml['attributes']['file'] = $this->filename;
         }
         if ($this->key !== null) {
             [$encoding, $key] = $this->binHandler->encodeForXml($this->key);
-            $xml['attributes']['key'] = $key;
+            $xml['attributes'] = ['key' => $key, ...$xml['attributes']]; // make key always first
             if ($encoding !== null) {
                 $xml['attributes']['key-encoding'] = $encoding;
             }
