@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b38fee6a940fb0df590d4863cd99c46",
+    "content-hash": "38c779a7a3e734bb854e7e3b8b91f00b",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -197,19 +197,20 @@
         },
         {
             "name": "arokettu/json5-builder",
-            "version": "1.1.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arokettu/json5-builder.git",
-                "reference": "c944438129f98cd98a516fa29f2afd9cd125b78b"
+                "reference": "ed0239f49d5f01a86c4fc430e1e0b8713e88e91f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/json5-builder/zipball/c944438129f98cd98a516fa29f2afd9cd125b78b",
-                "reference": "c944438129f98cd98a516fa29f2afd9cd125b78b",
+                "url": "https://api.github.com/repos/arokettu/json5-builder/zipball/ed0239f49d5f01a86c4fc430e1e0b8713e88e91f",
+                "reference": "ed0239f49d5f01a86c4fc430e1e0b8713e88e91f",
                 "shasum": ""
             },
             "require": {
+                "arokettu/is-resource": "^1.0",
                 "ext-json": "*",
                 "php": "^8.1"
             },
@@ -254,7 +255,7 @@
                 "issues": "https://gitlab.com/sandfox/json5-builder/-/issues",
                 "source": "https://gitlab.com/sandfox/json5-builder"
             },
-            "time": "2025-05-13T15:29:29+00:00"
+            "time": "2025-05-26T21:59:06+00:00"
         },
         {
             "name": "arokettu/kilo-mega",
