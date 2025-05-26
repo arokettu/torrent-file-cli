@@ -3,7 +3,7 @@ Torrent File CLI
 
 .. highlight:: bash
 
-|Packagist| |GitLab| |GitHub| |Gitea|
+|Packagist| |GitLab| |GitHub| |Codeberg| |Gitea|
 
 A CLI tool to manipulate torrent files.
 
@@ -49,5 +49,7 @@ The library is available as open source under the terms of the `MIT License`_.
    :target:     https://github.com/arokettu/torrent-file-cli
 .. |GitLab|     image:: https://img.shields.io/badge/get%20on-GitLab-informational.svg?style=flat-square&logo=gitlab
    :target:     https://gitlab.com/sandfox/torrent-file-cli
+.. |Codeberg|   image:: https://img.shields.io/badge/get%20on-Codeberg-informational.svg?style=flat-square&logo=codeberg
+   :target:     https://codeberg.org/sandfox/torrent-file-cli
 .. |Gitea|      image:: https://img.shields.io/badge/get%20on-Gitea-informational.svg?style=flat-square&logo=gitea
    :target:     https://sandfox.org/sandfox/torrent-file-cli
