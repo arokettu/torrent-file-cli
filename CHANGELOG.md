@@ -2,6 +2,12 @@
 
 ## 1.x
 
+### 1.2.1
+
+*May 27, 2025*
+
+* Allow arokettu/json5-builder 2.x
+
 ### 1.2.0
 
 *May 21, 2025*
