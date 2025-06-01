@@ -43,7 +43,7 @@ Import
 
 .. code-block:: sh
 
-    torrent-file export [-o|--output OUTPUT] [-f|--format=FORMAT] [--] [<file>]
+    torrent-file import [-o|--output OUTPUT] [-f|--format=FORMAT] [--] [<file>]
 
 -o OUTPUT, --output OUTPUT
         Output torrent file (if omitted, it tries to read file name from the export file)
