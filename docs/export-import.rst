@@ -49,7 +49,7 @@ Import
         Output torrent file (if omitted, it tries to read file name from the export file)
 -f FORMAT, --format FORMAT
         Input format.
-        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5 and JSON with comments.
+        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5 and JSONC.
         Files must be well-formed according to export schemas.
         When omitted, it can be autodetected from the <file> name.
         If no <file> specified, FORMAT is required.
@@ -57,7 +57,7 @@ Import
 .. warning::
     Currently ``json`` uses ``json5`` parser too making them effectively synonyms.
     This may change in future.
-    If you are using Microsoft's "JSON with comments", always specify ``json5`` parser explicitly.
+    If you are using Microsoft's JSONC ("JSON with Comments"), always specify ``json5`` parser explicitly.
 
 Formats
 =======
