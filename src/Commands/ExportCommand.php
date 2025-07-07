@@ -78,6 +78,10 @@ final class ExportCommand extends Command
             }
 
             $format = strtolower(substr($basename, $dot + 1));
+
+            if ($format === 'jsonc') {
+                $format = 'json';
+            }
         }
 
         if ($outputFile === null) {

@@ -62,10 +62,15 @@ final class ImportCommand extends Command
             }
 
             $format = strtolower(substr($basename, $dot + 1));
+
+            if ($format === 'jsonc') {
+                $format = 'json5';
+            }
         }
 
         match ($format) {
-            'json', 'json5' => JsonImporter::import($path, $outputFile),
+            'json' => JsonImporter::import($path, $outputFile, false),
+            'json5' => JsonImporter::import($path, $outputFile, true),
             'xml' => XmlImporter::import($path, $outputFile),
             default => throw new \RuntimeException(\sprintf('Unrecognized format: "%s".', $format)),
         };

@@ -54,11 +54,6 @@ Import
         When omitted, it can be autodetected from the <file> name.
         If no <file> specified, FORMAT is required.
 
-.. warning::
-    Currently ``json`` uses ``json5`` parser too making them effectively synonyms.
-    This may change in future.
-    If you are using Microsoft's JSONC ("JSON with Comments"), always specify ``json5`` parser explicitly.
-
 Formats
 =======
 
@@ -373,3 +368,9 @@ Here is an example, for annotations see JSON5 example:
             ]
         }
     }
+
+JSONC
+-----
+
+JSONC (JSON with Comments) is not treated as a separate format and cannot be specified.
+Files with .jsonc extension are exported as JSON and imported as JSON5.

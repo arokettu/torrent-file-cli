@@ -51,7 +51,7 @@ final class JsonExporter
             Json5Encoder::encode($json) :
             JsonEncoder::encode($json, $pretty ?
                 JsonEncoder::ENCODE_PRETTY :
-                JSONEncoder::ENCODE_DEFAULT));
+                JsonEncoder::ENCODE_DEFAULT));
         fclose($h);
     }
 }

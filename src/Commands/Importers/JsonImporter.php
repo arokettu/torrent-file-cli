@@ -12,10 +12,11 @@ use ArrayObject;
 
 final class JsonImporter
 {
-    public static function import(string $path, string|null $outputFile): void
+    public static function import(string $path, string|null $outputFile, bool $json5): void
     {
         $file = fopen($path, 'r');
-        $data = Json::stdClassToArrayObject(json5_decode(stream_get_contents($file)));
+        $parser = $json5 ? json5_decode(...) : json_decode(...);
+        $data = Json::stdClassToArrayObject($parser(stream_get_contents($file)));
         fclose($file);
 
         if (($data['$schema'] ?? '') !== JsonExporter::SCHEMA) {
