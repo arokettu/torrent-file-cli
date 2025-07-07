@@ -16,7 +16,7 @@ final class JsonImporter
     {
         $file = fopen($path, 'r');
         $parser = $json5 ? json5_decode(...) : json_decode(...);
-        $data = Json::stdClassToArrayObject($parser(stream_get_contents($file)));
+        $data = Json::stdClassToArrayObject($parser(stream_get_contents($file), flags: JSON_THROW_ON_ERROR));
         fclose($file);
 
         if (($data['$schema'] ?? '') !== JsonExporter::SCHEMA) {
