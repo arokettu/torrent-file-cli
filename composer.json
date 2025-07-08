@@ -32,6 +32,11 @@
             "Arokettu\\Torrent\\CLI\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Arokettu\\Torrent\\CLI\\Tests\\": "tests"
+        }
+    },
     "bin": [
         "bin/torrent-file"
     ],
@@ -51,6 +56,7 @@
     },
     "require-dev": {
         "ext-openssl": "*",
+        "phpunit/phpunit": "^10.5",
         "sandfox.dev/code-standard": "^1.2025.06.29",
         "squizlabs/php_codesniffer": "*",
         "vimeo/psalm": "^6"

@@ -4,3 +4,5 @@
 /build
 /docs/build
 /venv
+/.phpunit.result.cache
+/reports
