@@ -2,6 +2,10 @@
 
 ## 1.x
 
+### next patch
+
+* Fix `announce-list` being erased on modification
+
 ### 1.2.2
 
 *Jul 8, 2025*

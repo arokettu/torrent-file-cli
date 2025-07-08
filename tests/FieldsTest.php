@@ -98,4 +98,45 @@ final class FieldsTest extends TestCase
         $fields->applyFields($input, $torrent);
         self::assertNull($torrent->getAnnounce());
     }
+
+    public function testAmmounceList(): void
+    {
+        $torrent = TorrentFile::loadFromString('de');
+
+        $fields = $this->getFieldsTrait();
+
+        // set single url
+        $input = $this->createInput('--announce-list=http://localhost');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals([['http://localhost']], $torrent->getAnnounceList()->toArray());
+
+        // set 2 urls
+        $input = $this->createInput('--announce-list=http://localhost,http://example.org');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals([['http://localhost', 'http://example.org']], $torrent->getAnnounceList()->toArray());
+
+        // set 2 tiers
+        $input = $this->createInput('--announce-list=http://localhost --announce-list=http://example.org');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals([['http://localhost'], ['http://example.org']], $torrent->getAnnounceList()->toArray());
+
+        // unset
+        $input = $this->createInput('--no-announce-list');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals([], $torrent->getAnnounceList()->toArray());
+    }
+
+    public function testAmmounceListNotErased(): void
+    {
+        $torrent = TorrentFile::loadFromString('de');
+        $torrent->setAnnounceList([['http://localhost']]);
+
+        $fields = $this->getFieldsTrait();
+
+        // set something irrelevant
+        $input = $this->createInput('--comment=Comment');
+        $fields->applyFields($input, $torrent);
+
+        self::assertEquals([['http://localhost']], $torrent->getAnnounceList()->toArray());
+    }
 }

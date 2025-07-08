@@ -102,7 +102,7 @@ trait FieldsTrait
 
         if ($input->getOption('no-announce-list')) {
             $torrent->setAnnounceList(null);
-        } elseif ($input->getOption('announce-list') !== null) {
+        } elseif ($input->getOption('announce-list') !== []) {
             $torrent->setAnnounceList(
                 array_map(static fn ($s) => explode(',', $s), $input->getOption('announce-list')),
             );
