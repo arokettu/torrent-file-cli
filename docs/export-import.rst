@@ -372,5 +372,5 @@ Here is an example, for annotations see JSON5 example:
 JSONC
 -----
 
-JSONC (JSON with Comments) is not treated as a separate format and cannot be specified.
+JSONC (JSON with Comments) is not treated as a separate format and cannot be explicitly specified.
 Files with .jsonc extension are exported as JSON and imported as JSON5.
