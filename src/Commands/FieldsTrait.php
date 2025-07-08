@@ -66,9 +66,9 @@ trait FieldsTrait
         $this->addOption(
             'announce-list',
             mode: InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-            description:
-                'Comma separated list of trackers for a single announce tier. ' .
-                'Use multiple times to create multiple tiers',
+            description: <<<DESC
+                Comma separated list of trackers for a single announce tier. Use multiple times to create multiple tiers
+                DESC,
         );
         $this->addOption(
             'no-announce-list',

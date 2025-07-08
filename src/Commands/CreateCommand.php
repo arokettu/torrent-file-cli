@@ -51,8 +51,9 @@ final class CreateCommand extends Command
         $this->addOption(
             'piece-length',
             mode: InputOption::VALUE_REQUIRED,
-            description:
-                'Hashed piece length in bytes, must be a power of 2, minimum 16K (K and M postfixes can be used)',
+            description: <<<DESC
+                Hashed piece length in bytes, must be a power of 2, minimum 16K (K and M postfixes can be used)
+                DESC,
             default: '512K',
         );
 
