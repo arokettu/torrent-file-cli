@@ -103,7 +103,9 @@ trait FieldsTrait
         if ($input->getOption('no-announce-list')) {
             $torrent->setAnnounceList(null);
         } elseif ($input->getOption('announce-list') !== null) {
-            $torrent->setAnnounceList(array_map(fn($s) => explode(',', $s), $input->getOption('announce-list')));
+            $torrent->setAnnounceList(
+                array_map(static fn ($s) => explode(',', $s), $input->getOption('announce-list')),
+            );
         }
 
         if ($input->getOption('no-created-by')) {

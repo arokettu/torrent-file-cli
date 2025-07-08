@@ -24,7 +24,7 @@ final class XmlList implements XmlDeserializable, BencodeSerializable
 
         $children = $reader->parseInnerTree();
 
-        return new self($file, ...array_map(fn ($child) => $child['value'], $children));
+        return new self($file, ...array_map(static fn ($child) => $child['value'], $children));
     }
 
     public function bencodeSerialize(): ListType

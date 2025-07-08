@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38c779a7a3e734bb854e7e3b8b91f00b",
+    "content-hash": "7f606be075aedf97504e371a490e2656",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -4018,16 +4018,16 @@
         },
         {
             "name": "sandfox.dev/code-standard",
-            "version": "1.2025.05.07",
+            "version": "1.2025.06.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arokettu/php-code-standard.git",
-                "reference": "398e8f3bc8363e20478d4e386254a47699fdcec4"
+                "reference": "10c764c77ebcfd33e3b699915b580bb2ec4bee49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/php-code-standard/zipball/398e8f3bc8363e20478d4e386254a47699fdcec4",
-                "reference": "398e8f3bc8363e20478d4e386254a47699fdcec4",
+                "url": "https://api.github.com/repos/arokettu/php-code-standard/zipball/10c764c77ebcfd33e3b699915b580bb2ec4bee49",
+                "reference": "10c764c77ebcfd33e3b699915b580bb2ec4bee49",
                 "shasum": ""
             },
             "require": {
@@ -4055,9 +4055,9 @@
             ],
             "support": {
                 "issues": "https://github.com/arokettu/php-code-standard/issues",
-                "source": "https://github.com/arokettu/php-code-standard/tree/1.2025.05.07"
+                "source": "https://github.com/arokettu/php-code-standard/tree/1.2025.06.29"
             },
-            "time": "2025-05-07T16:17:32+00:00"
+            "time": "2025-06-28T22:19:01+00:00"
         },
         {
             "name": "sebastian/diff",

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Arokettu\Torrent\CLI\Commands\Importers\XML;
 
 use Arokettu\Bencode\Types\BencodeSerializable;
-use Arokettu\Torrent\CLI\Params\BinString;
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
 

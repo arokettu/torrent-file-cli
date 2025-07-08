@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Arokettu\Torrent\CLI\Commands\Importers\XML;
 
-use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Types\BencodeSerializable;
 use Arokettu\Bencode\Types\DictType;
 use Arokettu\Torrent\CLI\Commands\Exporters\XmlExporter;
@@ -30,7 +29,7 @@ final class XmlDictionary implements XmlDeserializable, BencodeSerializable
             XmlExporter::CLARK_NAMESPACE . 'item' => XmlDictItem::class,
         ]);
 
-        return new self($file, ...array_map(fn ($child) => $child['value'], $children));
+        return new self($file, ...array_map(static fn ($child) => $child['value'], $children));
     }
 
     public function bencodeSerialize(): mixed

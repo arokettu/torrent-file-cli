@@ -14,7 +14,7 @@ use Symfony\Component\Console\Application;
 
 $application = new Application(
     'arokettu/torrent-file-cli',
-    Phar::running() !== '' ? '@version@' : InstalledVersions::getPrettyVersion('arokettu/torrent-file-cli')
+    Phar::running() !== '' ? '@version@' : InstalledVersions::getPrettyVersion('arokettu/torrent-file-cli'),
 );
 
 $application->add(new CreateCommand());

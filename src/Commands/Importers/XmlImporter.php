@@ -30,12 +30,12 @@ final class XmlImporter
 
         if ($outputFile === null) {
             $outputFile = $result->file ?? throw new \RuntimeException(
-                'File name was not specified in neither command line nor export data.'
+                'File name was not specified in neither command line nor export data.',
             );
 
             if (str_contains($outputFile, '/') || str_contains($outputFile, '\\')) {
                 throw new \RuntimeException(
-                    'Path separators cannot be specified in the file name declaration in the imported file.'
+                    'Path separators cannot be specified in the file name declaration in the imported file.',
                 );
             }
         }

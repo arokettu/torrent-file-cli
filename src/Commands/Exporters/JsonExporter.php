@@ -23,8 +23,8 @@ final class JsonExporter
     ): void {
         $data = Bencode::load(
             $inputFile,
-            listType: fn ($v) => new Json\JsonList($v, $binStrings),
-            dictType: fn ($v) => new Json\JsonDict($v, $binStrings),
+            listType: static fn ($v) => new Json\JsonList($v, $binStrings),
+            dictType: static fn ($v) => new Json\JsonDict($v, $binStrings),
         );
 
         // handle the case when the entire data is a string

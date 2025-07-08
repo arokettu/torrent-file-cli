@@ -18,6 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use function Arokettu\KiloMega\format_bytes;
 
+// phpcs:disable SlevomatCodingStandard.ControlStructures.AssignmentInCondition
 final class ShowCommand extends Command
 {
     protected function configure(): void
@@ -151,7 +152,7 @@ final class ShowCommand extends Command
 
         $it = new \RecursiveIteratorIterator(
             $torrentFile->v2()->getFileTree(),
-            \RecursiveIteratorIterator::SELF_FIRST
+            \RecursiveIteratorIterator::SELF_FIRST,
         );
 
         $table = [];

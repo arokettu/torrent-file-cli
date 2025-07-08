@@ -26,7 +26,7 @@ final class SignCommand extends Command
             'output',
             'o',
             mode: InputOption::VALUE_REQUIRED,
-            description: 'Output torrent file (if omitted, overwrites)'
+            description: 'Output torrent file (if omitted, overwrites)',
         );
         $this->addOption(
             'include-cert',

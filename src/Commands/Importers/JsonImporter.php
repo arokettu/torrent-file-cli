@@ -25,18 +25,18 @@ final class JsonImporter
 
         if ($outputFile === null) {
             $outputFile = $data['file'] ?? throw new \RuntimeException(
-                'File name was not specified in neither command line nor export data.'
+                'File name was not specified in neither command line nor export data.',
             );
 
             if (str_contains($outputFile, '/') || str_contains($outputFile, '\\')) {
                 throw new \RuntimeException(
-                    'Path separators cannot be specified in the file name declaration in the imported file.'
+                    'Path separators cannot be specified in the file name declaration in the imported file.',
                 );
             }
         }
 
         $preparedData = self::processData(
-            $data['data'] ?? throw new \RuntimeException('Data is missing from the import file.')
+            $data['data'] ?? throw new \RuntimeException('Data is missing from the import file.'),
         );
 
         $file = fopen($outputFile, 'w');
@@ -51,7 +51,7 @@ final class JsonImporter
         }
 
         if (\is_array($data)) {
-            return array_map(fn (mixed $i) => self::processData($i), $data);
+            return array_map(static fn (mixed $i) => self::processData($i), $data);
         }
 
         if ($data instanceof ArrayObject) {
