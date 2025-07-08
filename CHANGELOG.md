@@ -2,7 +2,9 @@
 
 ## 1.x
 
-### next patch
+### 1.2.2
+
+*Jul 8, 2025*
 
 * `*.jsonc` files can be imported and exported
 * Fixed `json` format import accepting JSON5
