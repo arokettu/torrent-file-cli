@@ -139,4 +139,43 @@ final class FieldsTest extends TestCase
 
         self::assertEquals([['http://localhost']], $torrent->getAnnounceList()->toArray());
     }
+
+    public function testCreatedBy(): void
+    {
+        $torrent = TorrentFile::loadFromString('de');
+
+        $fields = $this->getFieldsTrait();
+
+        // set
+        $input = $this->createInput('--created-by=me');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals('me', $torrent->getCreatedBy());
+
+        // unset
+        $input = $this->createInput('--no-created-by');
+        $fields->applyFields($input, $torrent);
+        self::assertNull($torrent->getCreatedBy());
+    }
+
+    public function testCreationDate(): void
+    {
+        $torrent = TorrentFile::loadFromString('de');
+
+        $fields = $this->getFieldsTrait();
+
+        // set by timestamp
+        $input = $this->createInput('--creation-date=1751948960.657481');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals(new \DateTimeImmutable('@1751948960'), $torrent->getCreationDate());
+
+        // set by date expression
+        $input = $this->createInput('--creation-date=2014-02-03T01:10:00Z');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals(new \DateTimeImmutable('2014-02-03T01:10:00Z'), $torrent->getCreationDate());
+
+        // unset
+        $input = $this->createInput('--no-creation-date');
+        $fields->applyFields($input, $torrent);
+        self::assertNull($torrent->getCreationDate());
+    }
 }
