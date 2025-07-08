@@ -1,0 +1,81 @@
+stages:
+  - test
+  - report
+  - report-upload
+
+cache:
+  key: composer-cache
+  paths:
+    - .composer-cache/
+
+.test:
+  before_script:
+    # install system packages
+    - apt-get update && apt-get install -y git unzip
+    # install extensions
+    - if [ "$INSTALL_XDEBUG" -eq 1 ]; then pecl install xdebug; docker-php-ext-enable xdebug; fi
+    # install composer
+    - php -r "copy('https://composer.github.io/installer.sig', '/tmp/composer.sig');"
+    - php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');"
+    - php -r '$expected = file_get_contents("/tmp/composer.sig"); $actual = hash_file("sha384", "/tmp/composer-setup.php"); exit(intval(!hash_equals($expected, $actual)));'
+    - php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    - chmod +x /usr/local/bin/composer
+    - rm /tmp/composer-setup.php /tmp/composer.sig
+    # cache dependencies
+    - composer config -g cache-dir "$(pwd)/.composer-cache"
+  script:
+    # locked dependencies
+    - composer install
+    - vendor/bin/phpunit --fail-on-deprecation --fail-on-notice --fail-on-warning
+    # latest dependencies
+    - composer config platform.php --unset
+    - composer update
+    - vendor/bin/phpunit --fail-on-deprecation --fail-on-notice --fail-on-warning
+
+# main matrix
+test:
+  extends: .test
+  stage: test
+  image: php:${PHP_VERSION}
+  parallel:
+    matrix:
+      - PHP_VERSION:
+          - '8.1' # lowest version
+          - '8' # latest 8
+
+# lowest
+test-lowest:
+  extends: .test
+  stage: test
+  image: php:8.1
+  script:
+    - composer update --prefer-lowest
+    - vendor/bin/phpunit --fail-on-deprecation --fail-on-notice --fail-on-warning
+
+# coverage
+coverage:
+  variables:
+    INSTALL_XDEBUG: 1
+  extends: .test
+  stage: report
+  only:
+    - master
+  image: php:8.2
+  artifacts:
+    paths:
+      - reports
+    expire_in: 1h
+  script:
+    - composer update
+    - XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover reports/coverage.xml --log-junit reports/junit.xml
+
+coverage-upload:
+  stage: report-upload
+  image: python:3.12
+  only:
+    - master
+  before_script:
+    - pip install codecov-cli
+  script:
+    - codecovcli do-upload --report-type test_results --file reports/junit.xml --token $CODECOV_TOKEN
+    - codecovcli upload-process --file reports/coverage.xml --token $CODECOV_TOKEN
