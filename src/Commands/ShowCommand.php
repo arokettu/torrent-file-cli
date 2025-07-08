@@ -82,7 +82,7 @@ final class ShowCommand extends Command
         }
 
         if (!($httpSeeds = $torrent->getHttpSeeds())->empty()) {
-            $output->writeln('<comment>Http seed list:</comment>');
+            $output->writeln('<comment>HTTP seed list:</comment>');
             foreach ($httpSeeds as $i => $httpSeed) {
                 $output->write(($i + 1) . '. ');
                 $output->writeln($httpSeed);

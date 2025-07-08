@@ -2,9 +2,11 @@
 
 ## 1.x
 
-### next patch
+### next
 
-* Fix `announce-list` being erased on modification
+* Added new params for `create` and `modify` commands:
+  * `--http-seeds` / `--no-http-seeds`
+* Fixed `announce-list` being erased on modification
 
 ### 1.2.2
 

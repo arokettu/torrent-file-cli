@@ -178,4 +178,26 @@ final class FieldsTest extends TestCase
         $fields->applyFields($input, $torrent);
         self::assertNull($torrent->getCreationDate());
     }
+
+    public function testHttpSeeds(): void
+    {
+        $torrent = TorrentFile::loadFromString('de');
+
+        $fields = $this->getFieldsTrait();
+
+        // set 1
+        $input = $this->createInput('--http-seeds=https://example.com');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals(['https://example.com'], $torrent->getHttpSeeds()->toArray());
+
+        // set 2
+        $input = $this->createInput('--http-seeds=https://example.net,https://example.org');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals(['https://example.net', 'https://example.org'], $torrent->getHttpSeeds()->toArray());
+
+        // unset
+        $input = $this->createInput('--no-http-seeds');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals([], $torrent->getHttpSeeds()->toArray());
+    }
 }

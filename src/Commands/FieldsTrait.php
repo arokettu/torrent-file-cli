@@ -75,6 +75,16 @@ trait FieldsTrait
             mode: InputOption::VALUE_NONE,
             description: 'Erase list of trackers',
         );
+        $this->addOption(
+            'http-seeds',
+            mode: InputOption::VALUE_REQUIRED,
+            description: 'Comma separated list of HTTP seed urls',
+        );
+        $this->addOption(
+            'no-http-seeds',
+            mode: InputOption::VALUE_NONE,
+            description: 'Erase HTTP seeds',
+        );
     }
 
     private function applyFields(InputInterface $input, TorrentFile $torrent): void
@@ -124,6 +134,12 @@ trait FieldsTrait
                 $date = new \DateTimeImmutable($date);
             }
             $torrent->setCreationDate($date);
+        }
+
+        if ($input->getOption('no-http-seeds')) {
+            $torrent->setHttpSeeds(null);
+        } elseif ($input->getOption('http-seeds') !== null) {
+            $torrent->setHttpSeeds(explode(',', $input->getOption('http-seeds')));
         }
     }
 }
