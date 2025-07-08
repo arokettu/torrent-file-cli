@@ -1,11 +1,21 @@
 # Torrent File CLI
 
-[![Packagist](https://img.shields.io/packagist/v/arokettu/torrent-file-cli.svg?style=flat-square)][Packagist]
-[![PHP](https://img.shields.io/packagist/php-v/arokettu/torrent-file-cli.svg?style=flat-square)][Packagist]
-[![License](https://img.shields.io/packagist/l/arokettu/torrent-file-cli.svg?style=flat-square)][License]
+[![Packagist]][Packagist Link]
+[![PHP]][Packagist Link]
+[![License]][License Link]
+[![Gitlab CI]][Gitlab CI Link]
+[![Codecov]][Codecov Link]
 
-[Packagist]: https://packagist.org/packages/arokettu/torrent-file-cli
-[License]: LICENSE.md
+[Packagist]: https://img.shields.io/packagist/v/arokettu/torrent-file-cli.svg?style=flat-square
+[PHP]: https://img.shields.io/packagist/php-v/arokettu/torrent-file-cli.svg?style=flat-square
+[License]: https://img.shields.io/packagist/l/arokettu/torrent-file-cli.svg?style=flat-square
+[Gitlab CI]: https://img.shields.io/gitlab/pipeline/sandfox/torrent-file-cli/master.svg?style=flat-square
+[Codecov]: https://img.shields.io/codecov/c/gl/sandfox/torrent-file-cli?style=flat-square
+
+[Packagist Link]: https://packagist.org/packages/arokettu/torrent-file-cli
+[License Link]: LICENSE.md
+[Gitlab CI Link]: https://gitlab.com/sandfox/torrent-file-cli/-/pipelines
+[Codecov Link]: https://codecov.io/gl/sandfox/torrent-file-cli/
 
 A CLI tool to manipulate torrent files.
 
@@ -70,4 +80,4 @@ Feel free to ask any questions in our room on Gitter: <https://gitter.im/arokett
 
 ## License
 
-The library is available as open source under the terms of the [MIT License][License].
+The library is available as open source under the terms of the [MIT License][License Link].
