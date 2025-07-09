@@ -2,12 +2,15 @@
 
 ## 1.x
 
-### next
+### 1.3.0
+
+*Jul 9, 2025*
 
 * Added new params for `create` and `modify` commands:
   * `--http-seeds` / `--no-http-seeds`
   * `--nodes` / `--no-nodes`
   * `--url-list` / `--no-url-list`
+* ``--piece-align`` for `create`
 * Fixed `announce-list` being erased on modification
 
 ### 1.2.2
