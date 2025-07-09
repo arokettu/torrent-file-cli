@@ -200,4 +200,42 @@ final class FieldsTest extends TestCase
         $fields->applyFields($input, $torrent);
         self::assertEquals([], $torrent->getHttpSeeds()->toArray());
     }
+
+    public function testNodes(): void
+    {
+        $torrent = TorrentFile::loadFromString('de');
+
+        $fields = $this->getFieldsTrait();
+
+        // set
+        $input = $this->createInput(
+            '--nodes=127.0.0.1:6881,your.router.node:4804,[2001:db8:100:0:d5c8:db3f:995e:c0f7]:1941',
+        );
+        $fields->applyFields($input, $torrent);
+        self::assertEquals([
+            ['127.0.0.1', 6881],
+            ['your.router.node', 4804],
+            ['2001:db8:100:0:d5c8:db3f:995e:c0f7', 1941]
+        ], $torrent->getNodes()->toArray());
+
+        // unset
+        $input = $this->createInput('--no-nodes');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals([], $torrent->getNodes()->toArray());
+    }
+
+    public function testInvalidNode(): void
+    {
+        $torrent = TorrentFile::loadFromString('de');
+
+        $fields = $this->getFieldsTrait();
+
+        // set
+        $input = $this->createInput(
+            '--nodes=127.0.0.1',
+        );
+
+        self::expectException(\RuntimeException::class);
+        $fields->applyFields($input, $torrent);
+    }
 }

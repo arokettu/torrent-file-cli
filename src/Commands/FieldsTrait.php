@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arokettu\Torrent\CLI\Commands;
 
+use Arokettu\Torrent\DataTypes\Node;
 use Arokettu\Torrent\TorrentFile;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -18,11 +19,13 @@ trait FieldsTrait
             mode: InputOption::VALUE_REQUIRED,
             description: 'Torrent name',
         );
+
         $this->addOption(
             'private',
             mode: InputOption::VALUE_NEGATABLE,
             description: 'Private torrent',
         );
+
         $this->addOption(
             'comment',
             mode: InputOption::VALUE_REQUIRED,
@@ -33,6 +36,7 @@ trait FieldsTrait
             mode: InputOption::VALUE_NONE,
             description: 'Erase torrent description',
         );
+
         $this->addOption(
             'created-by',
             mode: InputOption::VALUE_REQUIRED,
@@ -43,6 +47,7 @@ trait FieldsTrait
             mode: InputOption::VALUE_NONE,
             description: 'Erase created by',
         );
+
         $this->addOption(
             'creation-date',
             mode: InputOption::VALUE_REQUIRED,
@@ -53,6 +58,7 @@ trait FieldsTrait
             mode: InputOption::VALUE_NONE,
             description: 'Erase creation date',
         );
+
         $this->addOption(
             'announce',
             mode: InputOption::VALUE_REQUIRED,
@@ -63,6 +69,7 @@ trait FieldsTrait
             mode: InputOption::VALUE_NONE,
             description: 'Erase tracker',
         );
+
         $this->addOption(
             'announce-list',
             mode: InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
@@ -75,6 +82,7 @@ trait FieldsTrait
             mode: InputOption::VALUE_NONE,
             description: 'Erase list of trackers',
         );
+
         $this->addOption(
             'http-seeds',
             mode: InputOption::VALUE_REQUIRED,
@@ -84,6 +92,18 @@ trait FieldsTrait
             'no-http-seeds',
             mode: InputOption::VALUE_NONE,
             description: 'Erase HTTP seeds',
+        );
+
+
+        $this->addOption(
+            'nodes',
+            mode: InputOption::VALUE_REQUIRED,
+            description: 'Comma separated list of DHT nodes (ipv4:port or [ipv6]:port or host:port)',
+        );
+        $this->addOption(
+            'no-nodes',
+            mode: InputOption::VALUE_NONE,
+            description: 'Erase DHT nodes',
         );
     }
 
@@ -141,5 +161,44 @@ trait FieldsTrait
         } elseif ($input->getOption('http-seeds') !== null) {
             $torrent->setHttpSeeds(explode(',', $input->getOption('http-seeds')));
         }
+
+        if ($input->getOption('no-nodes')) {
+            $torrent->setNodes(null);
+        } elseif ($input->getOption('nodes') !== null) {
+            $torrent->setNodes(array_map(
+                fn ($s) => $this->parseNode($s),
+                explode(',', $input->getOption('nodes')),
+            ));
+        }
+    }
+
+    private function parseNode(string $node): Node
+    {
+        $colons = substr_count($node, ':');
+
+        if ($colons === 1) {
+            [$host, $port] = explode(':', $node);
+            if ((string)(int)$port === $port) {
+                $port = (int)$port; // let it crash if not numeric
+            }
+            return new Node($host, $port);
+        }
+
+        if ($colons === 0) {
+            throw new \RuntimeException('Looks like an invalid node: ' . $node);
+        }
+
+        $lastColon = strrpos($node, ':');
+
+        $ip = substr($node, 0, $lastColon);
+        $ip = ltrim($ip, '['); // accept [ipv6]:port
+        $ip = rtrim($ip, ']');
+
+        $port = substr($node, $lastColon + 1);
+        if ((string)(int)$port === $port) {
+            $port = (int)$port; // let it crash if not numeric
+        }
+
+        return new Node($ip, $port);
     }
 }
