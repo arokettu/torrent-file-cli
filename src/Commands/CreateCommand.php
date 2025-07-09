@@ -56,6 +56,14 @@ final class CreateCommand extends Command
                 DESC,
             default: '512K',
         );
+        $this->addOption(
+            'piece-align',
+            mode: InputOption::VALUE_NEGATABLE,
+            description: <<<DESC
+                Align files to piece boundaries by inserting pad files <info>(only with --metadata-version=1)</info>
+                DESC,
+            default: false,
+        );
 
         $this->configureFields();
     }
@@ -78,7 +86,7 @@ final class CreateCommand extends Command
             path: $path,
             version: $metaVersion,
             pieceLength: $this->parsePieceLength($input->getOption('piece-length')),
-            pieceAlign: false, // pure v1 only
+            pieceAlign: $input->getOption('piece-align'), // pure v1 only
             detectExec: $input->getOption('detect-exec'),
             detectSymlinks: $input->getOption('detect-symlinks'),
             createdBy: 'Torrent File CLI by Sand Fox https://gitlab.com/sandfox/torrent-file-cli',

@@ -98,7 +98,7 @@ trait FieldsTrait
         $this->addOption(
             'nodes',
             mode: InputOption::VALUE_REQUIRED,
-            description: 'Comma separated list of DHT nodes (ipv4:port or [ipv6]:port or host:port)',
+            description: 'Comma separated list of DHT nodes <info>(ipv4:port or [ipv6]:port or host:port)</info>',
         );
         $this->addOption(
             'no-nodes',

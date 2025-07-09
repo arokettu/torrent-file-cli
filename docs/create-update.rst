@@ -10,7 +10,8 @@ Torrent Creation
 
     torrent-file create [-o|--output OUTPUT] [--metadata-version=METADATA-VERSION]
         [--detect-exec|--no-detect-exec] [--detect-symlinks|--no-detect-symlinks]
-        [--piece-length=PIECE-LENGTH] [--name=NAME] [--private|--no-private]
+        [--piece-length=PIECE-LENGTH] [--piece-align|--no-piece-align]
+        [--name=NAME] [--private|--no-private]
         [--comment=COMMENT|--no-comment] [--created-by CREATED-BY|--no-created-by]
         [--creation-date=CREATION-DATE|--no-creation-date] [--announce ANNOUNCE|--no-announce]
         [--announce-list=ANNOUNCE-LIST|--no-announce-list]
@@ -40,6 +41,10 @@ Options:
         Torrent piece length in bytes. Must be a power of 2 and at least 16KiB.
         It can be written with ``K`` suffix for KiB and ``M`` for MiB.
         Default: ``512K``
+--piece-align, --no-piece-align
+        Align files to piece boundaries by inserting pad files.
+        The option is ignored for V2 and V1+V2 torrent files because files in V2 are always aligned.
+        Default: ``--no-piece-align``
 
 See :ref:`torrent-common-options` section for options common to creation and modification.
 
