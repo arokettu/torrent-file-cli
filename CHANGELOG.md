@@ -6,6 +6,8 @@
 
 * Added new params for `create` and `modify` commands:
   * `--http-seeds` / `--no-http-seeds`
+  * `--nodes` / `--no-nodes`
+  * `--url-list` / `--no-url-list`
 * Fixed `announce-list` being erased on modification
 
 ### 1.2.2

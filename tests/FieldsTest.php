@@ -238,4 +238,26 @@ final class FieldsTest extends TestCase
         self::expectException(\RuntimeException::class);
         $fields->applyFields($input, $torrent);
     }
+
+    public function testUrlList(): void
+    {
+        $torrent = TorrentFile::loadFromString('de');
+
+        $fields = $this->getFieldsTrait();
+
+        // set 1
+        $input = $this->createInput('--url-list=https://example.com');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals(['https://example.com'], $torrent->getUrlList()->toArray());
+
+        // set 2
+        $input = $this->createInput('--url-list=https://example.net,https://example.org');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals(['https://example.net', 'https://example.org'], $torrent->getUrlList()->toArray());
+
+        // unset
+        $input = $this->createInput('--no-url-list');
+        $fields->applyFields($input, $torrent);
+        self::assertEquals([], $torrent->getUrlList()->toArray());
+    }
 }

@@ -105,6 +105,17 @@ trait FieldsTrait
             mode: InputOption::VALUE_NONE,
             description: 'Erase DHT nodes',
         );
+
+        $this->addOption(
+            'url-list',
+            mode: InputOption::VALUE_REQUIRED,
+            description: 'A list of webseed URLs',
+        );
+        $this->addOption(
+            'no-url-list',
+            mode: InputOption::VALUE_NONE,
+            description: 'Erase webseed URLs',
+        );
     }
 
     private function applyFields(InputInterface $input, TorrentFile $torrent): void
@@ -169,6 +180,12 @@ trait FieldsTrait
                 fn ($s) => $this->parseNode($s),
                 explode(',', $input->getOption('nodes')),
             ));
+        }
+
+        if ($input->getOption('no-url-list')) {
+            $torrent->setUrlList(null);
+        } elseif ($input->getOption('url-list') !== null) {
+            $torrent->setUrlList(explode(',', $input->getOption('url-list')));
         }
     }
 
