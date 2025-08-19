@@ -33,7 +33,7 @@ final class ExportCommand extends Command
             'f',
             mode: InputOption::VALUE_REQUIRED,
             description: <<<DESC
-                Output format [json|json5|xml]
+                Output format [json|json5|jsonc|xml]
                 It can be autodetected if output is specified, otherwise required
                 DESC,
         );
@@ -78,10 +78,6 @@ final class ExportCommand extends Command
             }
 
             $format = strtolower(substr($basename, $dot + 1));
-
-            if ($format === 'jsonc') {
-                $format = 'json';
-            }
         }
 
         if ($outputFile === null) {
@@ -92,9 +88,10 @@ final class ExportCommand extends Command
         $binStrings->assertExport();
 
         match ($format) {
-            'json' => JsonExporter::export($path, $outputFile, $binStrings, false, $input->getOption('pretty')),
-            'json5' => JsonExporter::export($path, $outputFile, $binStrings, true, $input->getOption('pretty')),
-            'xml' => XmlExporter::export($path, $outputFile, $binStrings, $input->getOption('pretty')),
+            'json', 'jsonc', 'json5'
+                => JsonExporter::export($path, $outputFile, $binStrings, $format, $input->getOption('pretty')),
+            'xml'
+                => XmlExporter::export($path, $outputFile, $binStrings, $input->getOption('pretty')),
             default => throw new \RuntimeException(\sprintf('Unrecognized format: "%s".', $format)),
         };
 

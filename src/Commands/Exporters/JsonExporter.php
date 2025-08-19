@@ -7,6 +7,7 @@ namespace Arokettu\Torrent\CLI\Commands\Exporters;
 use Arokettu\Bencode\Bencode;
 use Arokettu\Json\Json as JsonEncoder;
 use Arokettu\Json5\Json5Encoder;
+use Arokettu\Json5\JsonCEncoder;
 use Arokettu\Json5\Values\CommentDecorator;
 use Arokettu\Torrent\CLI\Params\BinString;
 
@@ -14,11 +15,14 @@ final class JsonExporter
 {
     public const SCHEMA = 'https://data.arokettu.dev/json/torrent-file-v1.json';
 
+    /**
+     * @param 'json'|'json5'|'jsonc' $format
+     */
     public static function export(
         string $inputFile,
         string $outputFile,
         BinString $binStrings,
-        bool $json5,
+        string $format,
         bool $pretty,
     ): void {
         $data = Bencode::load(
@@ -47,11 +51,13 @@ final class JsonExporter
         ];
 
         $h = fopen($outputFile, 'w');
-        fwrite($h, $json5 ?
-            Json5Encoder::encode($json) :
-            JsonEncoder::encode($json, $pretty ?
+        fwrite($h, match ($format) {
+            'json5' => Json5Encoder::encode($json),
+            'jsonc' => JsonCEncoder::encode($json),
+            'json' => JsonEncoder::encode($json, $pretty ?
                 JsonEncoder::ENCODE_PRETTY :
-                JsonEncoder::ENCODE_DEFAULT));
+                JsonEncoder::ENCODE_DEFAULT)
+        });
         fclose($h);
     }
 }

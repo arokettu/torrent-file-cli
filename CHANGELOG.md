@@ -2,6 +2,10 @@
 
 ## 1.x
 
+### next
+
+* JSONC support
+
 ### 1.3.0
 
 *Jul 9, 2025*
