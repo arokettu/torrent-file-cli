@@ -6,7 +6,9 @@
 
 *Aug 27, 2025*
 
-* Better JSONC support: JSONC export now contains comments like JSON5
+* Better JSONC support:
+  * `jsonc` is a valid value for format options
+  * JSONC export now contains comments like JSON5
 
 ### 1.3.0
 
