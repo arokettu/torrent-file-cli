@@ -28,7 +28,7 @@ Options:
         Output torrent export file (if omitted, dumps to stdout)
 -f FORMAT, --format FORMAT
         Output format.
-        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5.
+        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5, ``jsonc`` for JSONC.
         When omitted, it can be autodetected from the OUTPUT file name.
         If no OUTPUT specified, FORMAT is required.
 --bin-strings BIN-STRINGS
@@ -49,7 +49,7 @@ Import
         Output torrent file (if omitted, it tries to read file name from the export file)
 -f FORMAT, --format FORMAT
         Input format.
-        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5 and JSONC.
+        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5, ``jsonc`` for JSONC (parsed as JSON5).
         Files must be well-formed according to export schemas.
         When omitted, it can be autodetected from the <file> name.
         If no <file> specified, FORMAT is required.
@@ -393,34 +393,15 @@ On import JSONC files are treated as JSON5.
         "data": {
             "announce": "udp://fosstorrents.com:6969/announce",
             "announce-list": [
-                [
-                    "udp://fosstorrents.com:6969/announce",
-                    "http://fosstorrents.com:6969/announce"
-                ],
-                [
-                    "udp://tracker.opentrackr.org:1337/announce"
-                ],
-                [
-                    "udp://tracker.torrent.eu.org:451/announce"
-                ],
-                [
-                    "udp://tracker-udp.gbitt.info:80/announce"
-                ],
-                [
-                    "udp://open.demonii.com:1337/announce"
-                ],
-                [
-                    "udp://open.stealth.si:80/announce"
-                ],
-                [
-                    "udp://exodus.desync.com:6969/announce"
-                ],
-                [
-                    "udp://tracker.theoks.net:6969/announce"
-                ],
-                [
-                    "udp://opentracker.io:6969/announce"
-                ]
+                ["udp://fosstorrents.com:6969/announce", "http://fosstorrents.com:6969/announce"],
+                ["udp://tracker.opentrackr.org:1337/announce"],
+                ["udp://tracker.torrent.eu.org:451/announce"],
+                ["udp://tracker-udp.gbitt.info:80/announce"],
+                ["udp://open.demonii.com:1337/announce"],
+                ["udp://open.stealth.si:80/announce"],
+                ["udp://exodus.desync.com:6969/announce"],
+                ["udp://tracker.theoks.net:6969/announce"],
+                ["udp://opentracker.io:6969/announce"]
             ],
             "comment": "Unofficial FlightGear 2024.1.1 (Windows) torrent created by FOSS Torrents. Published on https://fosstorrents.com",
             "created by": "FOSS Torrents (https://fosstorrents.com/)",
