@@ -373,7 +373,7 @@ JSONC
 -----
 
 JSONC (JSON with Comments) is not treated as a full separate format.
-Separate JSONC export, with the same comments as JSON5 is available since 1.4.0.
+Separate JSONC export, with the same comments as JSON5, is available since 1.4.0.
 On import JSONC files are treated as JSON5.
 
 .. warning::
