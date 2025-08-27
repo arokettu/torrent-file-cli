@@ -2,9 +2,11 @@
 
 ## 1.x
 
-### next
+### 1.4.0
 
-* JSONC support
+*Aug 27, 2025*
+
+* Better JSONC support: JSONC export now contains comments like JSON5
 
 ### 1.3.0
 
