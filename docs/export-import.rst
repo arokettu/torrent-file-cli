@@ -201,7 +201,7 @@ Here is an annotated example:
     Please note that plaintext keys and values that contain a pipe (``|``) should be prefixed with ``"plain|"``.
     This is required to correctly separate binary and text values.
 
-.. code-block:: js
+.. code-block:: json5
 
     {
         // schema is required to determine that it's an import-ready file
@@ -372,5 +372,110 @@ Here is an example, for annotations see JSON5 example:
 JSONC
 -----
 
-JSONC (JSON with Comments) is not treated as a separate format and cannot be explicitly specified.
-Files with .jsonc extension are exported as JSON and imported as JSON5.
+JSONC (JSON with Comments) is not treated as a full separate format.
+Separate JSONC export, with the same comments as JSON5 is available since 1.4.0.
+On import JSONC files are treated as JSON5.
+
+.. warning::
+    Please note that plaintext keys and values that contain a pipe (``|``) should be prefixed with ``"plain|"``.
+    This is required to correctly separate binary and text values.
+
+.. code-block:: json
+
+    {
+        "$schema": "https://data.arokettu.dev/json/torrent-file-v1.json",
+        "file": "FlightGear-2024.1.1.exe-hybrid.torrent",
+        // Torrent file data goes here
+        // All strings, including keys, must have prefixes:
+        // "plain|" for the plain text (required only if the string contains another "|")
+        // "hex|" for hex encoded
+        // "base64|" for base64 encoded
+        "data": {
+            "announce": "udp://fosstorrents.com:6969/announce",
+            "announce-list": [
+                [
+                    "udp://fosstorrents.com:6969/announce",
+                    "http://fosstorrents.com:6969/announce"
+                ],
+                [
+                    "udp://tracker.opentrackr.org:1337/announce"
+                ],
+                [
+                    "udp://tracker.torrent.eu.org:451/announce"
+                ],
+                [
+                    "udp://tracker-udp.gbitt.info:80/announce"
+                ],
+                [
+                    "udp://open.demonii.com:1337/announce"
+                ],
+                [
+                    "udp://open.stealth.si:80/announce"
+                ],
+                [
+                    "udp://exodus.desync.com:6969/announce"
+                ],
+                [
+                    "udp://tracker.theoks.net:6969/announce"
+                ],
+                [
+                    "udp://opentracker.io:6969/announce"
+                ]
+            ],
+            "comment": "Unofficial FlightGear 2024.1.1 (Windows) torrent created by FOSS Torrents. Published on https://fosstorrents.com",
+            "created by": "FOSS Torrents (https://fosstorrents.com/)",
+            "creation date": 1741289369,
+            "info": {
+                "file tree": {
+                    "FlightGear-2024.1.1.exe": {
+                        "": {
+                            "length": 49048488,
+                            "pieces root": "hex|43acf738d623bd638a92b39c44bb45512b5c3cd1a850558a54fa962ce8465304"
+                        }
+                    }
+                },
+                "length": 49048488,
+                "meta version": 2,
+                "name": "FlightGear-2024.1.1.exe",
+                "piece length": 131072,
+                "pieces": "hex|33382697..." // truncated
+            },
+            "piece layers": {
+                "hex|43acf738d623bd638a92b39c44bb45512b5c3cd1a850558a54fa962ce8465304": "hex|a052d91d66aa047b..." // truncated
+            },
+            "url-list": [
+                "https://master.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://aarnet.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://citylan.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://colocrossing.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://cznic.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://dfn.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://freefr.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://garr.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://heanet.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://hivelocity.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://ignum.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://internode.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://iweb.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://jaist.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://kaz.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://kent.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://nchc.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://ncu.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://netcologne.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://optimate.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://skylink.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://softlayer-ams.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://softlayer-dal.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://sunet.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://superb-dca3.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://switch.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://tcpdiag.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://tenet.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://ufpr.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://vorboss.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "https://waia.dl.sourceforge.net/project/flightgear/release-2024.1/FlightGear-2024.1.1.exe",
+                "http://fosstorrents.com/direct-links/FlightGear-2024.1.1.exe"
+            ]
+        }
+    }
