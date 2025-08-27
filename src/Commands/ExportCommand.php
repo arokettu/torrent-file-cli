@@ -51,7 +51,7 @@ final class ExportCommand extends Command
         $this->addOption(
             name: 'pretty',
             mode: InputOption::VALUE_NEGATABLE,
-            description: 'Pretty print the output (no effect on JSON5)',
+            description: 'Pretty print the output (no effect on JSON5 and JSONC)',
             default: false,
         );
     }
