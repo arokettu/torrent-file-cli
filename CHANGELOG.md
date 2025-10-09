@@ -2,6 +2,17 @@
 
 ## 1.x
 
+### 1.4.1
+
+*Oct 10, 2025*
+
+* PHAR:
+  * Updated dependencies to fix known PHP 8.5 deprecations
+* Build:
+  * Fixed PHP 8.5 deprecation in the build script
+* The tool itself:
+  * No changes
+
 ### 1.4.0
 
 *Aug 27, 2025*
