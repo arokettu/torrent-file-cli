@@ -8,13 +8,28 @@
 
 chdir(__DIR__ . '/..');
 
-$timestamp = trim(`git log -1 --format="%at"`);
+$timestamp = trim(shell_exec("git log -1 --format='%at'"));
 
 $data = json_decode(file_get_contents('box.tpl.json'), true);
-$data['timestamp'] = (new DateTime('@' . $timestamp))->format('c');
+$data['timestamp'] = (new DateTimeImmutable('@' . $timestamp))->format('c');
 file_put_contents('box.json', json_encode($data, JSON_PRETTY_PRINT));
 
-passthru('composer install');
-passthru('box compile');
+run('composer install');
+run('box compile');
 
 unlink('box.json');
+
+/**
+ * Run command attaching it to the STDIN and STDOUT of the main process
+ */
+function run(string $command): int
+{
+    // phpcs:ignore PHPCS_SecurityAudit.BadFunctions.SystemExecFunctions.WarnSystemExec
+    $process = proc_open($command, [STDIN, STDOUT, STDERR], $pipes);
+
+    if ($process !== false) {
+        return proc_close($process);
+    }
+
+    return -1;
+}
