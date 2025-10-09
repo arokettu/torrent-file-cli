@@ -1,6 +1,11 @@
 #!/usr/bin/env php
 <?php
 
+/**
+ * @copyright 2023 Anton Smirnov
+ * @license MIT https://spdx.org/licenses/MIT.html
+ */
+
 chdir(__DIR__ . '/..');
 
 $timestamp = trim(`git log -1 --format="%at"`);
