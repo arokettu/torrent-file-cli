@@ -57,7 +57,7 @@
     "require-dev": {
         "ext-openssl": "*",
         "phpunit/phpunit": "^10.5",
-        "sandfox.dev/code-standard": "^1.2025.06.29",
+        "sandfox.dev/code-standard": "^1.2025.09.17",
         "squizlabs/php_codesniffer": "*",
         "vimeo/psalm": "^6"
     },
