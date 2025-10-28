@@ -19,9 +19,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ImportCommand extends Command
 {
+    public const NAME = 'import';
+
     protected function configure(): void
     {
-        $this->setName('import');
+        $this->setName(self::NAME);
         $this->setDescription('Import bencoded data from a human-readable format');
 
         $this->addArgument('file', mode: InputArgument::OPTIONAL, description: 'If omitted, STDIN will be read');

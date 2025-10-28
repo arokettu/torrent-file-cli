@@ -26,9 +26,11 @@ use function Arokettu\KiloMega\format_bytes;
 // phpcs:disable SlevomatCodingStandard.ControlStructures.AssignmentInCondition
 final class ShowCommand extends Command
 {
+    public const NAME = 'show';
+
     protected function configure(): void
     {
-        $this->setName('show');
+        $this->setName(self::NAME);
         $this->setDescription('Show contents of the torrent file');
 
         $this->addArgument('file', mode: InputArgument::REQUIRED, description: 'Path to the torrent file');

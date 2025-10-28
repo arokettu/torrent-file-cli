@@ -21,9 +21,11 @@ final class CreateCommand extends Command
 {
     use FieldsTrait;
 
+    public const NAME = 'create';
+
     protected function configure(): void
     {
-        $this->setName('create');
+        $this->setName(self::NAME);
         $this->setDescription('Create a torrent file for the given path');
 
         $this->addArgument('path', mode: InputArgument::REQUIRED);

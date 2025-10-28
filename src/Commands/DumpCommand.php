@@ -22,9 +22,11 @@ final class DumpCommand extends Command
 {
     use FieldsTrait;
 
+    public const NAME = 'dump';
+
     protected function configure(): void
     {
-        $this->setName('dump');
+        $this->setName(self::NAME);
         $this->setDescription('Dumps raw structure of the torrent file');
 
         $this->addArgument('file', mode: InputArgument::REQUIRED);

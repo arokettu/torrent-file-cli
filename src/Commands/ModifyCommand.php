@@ -20,9 +20,11 @@ final class ModifyCommand extends Command
 {
     use FieldsTrait;
 
+    public const NAME = 'modify';
+
     protected function configure(): void
     {
-        $this->setName('modify');
+        $this->setName(self::NAME);
         $this->setDescription('Modify a torrent file');
 
         $this->addArgument('file', mode: InputArgument::REQUIRED);

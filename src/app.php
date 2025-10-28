@@ -16,18 +16,21 @@ use Arokettu\Torrent\CLI\Commands\ShowCommand;
 use Arokettu\Torrent\CLI\Commands\SignCommand;
 use Composer\InstalledVersions;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\CommandLoader\FactoryCommandLoader;
 
 $application = new Application(
     'arokettu/torrent-file-cli',
     Phar::running() !== '' ? '@version@' : InstalledVersions::getPrettyVersion('arokettu/torrent-file-cli'),
 );
 
-$application->add(new CreateCommand());
-$application->add(new DumpCommand());
-$application->add(new ModifyCommand());
-$application->add(new ShowCommand());
-$application->add(new SignCommand());
-$application->add(new ExportCommand());
-$application->add(new ImportCommand());
+$application->setCommandLoader(new FactoryCommandLoader([
+    CreateCommand::NAME => fn () => new CreateCommand(),
+    DumpCommand::NAME   => fn () => new DumpCommand(),
+    ModifyCommand::NAME => fn () => new ModifyCommand(),
+    ShowCommand::NAME   => fn () => new ShowCommand(),
+    SignCommand::NAME   => fn () => new SignCommand(),
+    ExportCommand::NAME => fn () => new ExportCommand(),
+    ImportCommand::NAME => fn () => new ImportCommand(),
+]));
 
 return $application;

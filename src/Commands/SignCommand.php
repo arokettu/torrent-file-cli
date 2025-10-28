@@ -18,9 +18,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class SignCommand extends Command
 {
+    public const NAME = 'sign';
+
     protected function configure(): void
     {
-        $this->setName('sign');
+        $this->setName(self::NAME);
         $this->setDescription('Sign torrent');
 
         $this->addArgument('file', mode: InputArgument::REQUIRED, description: 'Path to the torrent file');

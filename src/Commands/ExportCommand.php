@@ -20,9 +20,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ExportCommand extends Command
 {
+    public const NAME = 'export';
+
     protected function configure(): void
     {
-        $this->setName('export');
+        $this->setName(self::NAME);
         $this->setDescription('Export bencoded data into a human-readable format');
 
         $this->addArgument('file', mode: InputArgument::REQUIRED);
