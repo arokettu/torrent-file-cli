@@ -39,7 +39,7 @@ final class ImportCommand extends Command
             'f',
             mode: InputOption::VALUE_REQUIRED,
             description: <<<DESC
-                Input format [json|json5|jsonc|xml]
+                Input format [json|json5|jsonc|jwcc|xml]
                 It can be autodetected if an input file is specified, otherwise required
                 DESC,
         );
@@ -73,7 +73,7 @@ final class ImportCommand extends Command
 
         match ($format) {
             'json' => JsonImporter::import($path, $outputFile, false),
-            'json5', 'jsonc' => JsonImporter::import($path, $outputFile, true),
+            'json5', 'jsonc', 'jwcc' => JsonImporter::import($path, $outputFile, true),
             'xml' => XmlImporter::import($path, $outputFile),
             default => throw new \RuntimeException(\sprintf('Unrecognized format: "%s".', $format)),
         };

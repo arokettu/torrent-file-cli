@@ -28,8 +28,8 @@ Options:
         Output torrent export file (if omitted, dumps to stdout)
 -f FORMAT, --format FORMAT
         Output format.
-        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5, ``jsonc`` for JSONC.
-        When omitted, it can be autodetected from the OUTPUT file name.
+        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5, ``jsonc`` and ``jwcc`` for JSONC/JWCC.
+        When omitted, it can be autodetected from the extension of the OUTPUT file name.
         If no OUTPUT specified, FORMAT is required.
 --bin-strings BIN-STRINGS
         Encode binary strings as:
@@ -49,9 +49,9 @@ Import
         Output torrent file (if omitted, it tries to read file name from the export file)
 -f FORMAT, --format FORMAT
         Input format.
-        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5, ``jsonc`` for JSONC (parsed as JSON5).
+        Supported formats: ``xml`` for XML, ``json`` for JSON, ``json5`` for JSON5, ``jsonc`` and ``jwcc`` for JSONC/JWCC (parsed as JSON5).
         Files must be well-formed according to export schemas.
-        When omitted, it can be autodetected from the <file> name.
+        When omitted, it can be autodetected from the extension of the <file> name.
         If no <file> specified, FORMAT is required.
 
 Formats
@@ -369,10 +369,10 @@ Here is an example, for annotations see JSON5 example:
         }
     }
 
-JSONC
------
+JSONC / JWCC
+------------
 
-JSONC (JSON with Comments) is not treated as a full separate format.
+JSONC (JSON with Comments) or JWCC (JSON with Commas and Comments) is not treated as a full separate format.
 Separate JSONC export, with the same comments as JSON5, is available since 1.4.0.
 On import JSONC files are treated as JSON5.
 

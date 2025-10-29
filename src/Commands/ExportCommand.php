@@ -40,7 +40,7 @@ final class ExportCommand extends Command
             'f',
             mode: InputOption::VALUE_REQUIRED,
             description: <<<DESC
-                Output format [json|json5|jsonc|xml]
+                Output format [json|json5|jsonc|jwcc|xml]
                 It can be autodetected if output is specified, otherwise required
                 DESC,
         );
@@ -92,10 +92,9 @@ final class ExportCommand extends Command
         }
 
         $binStrings = BinString::from($input->getOption('bin-strings'));
-        $binStrings->assertExport();
 
         match ($format) {
-            'json', 'jsonc', 'json5'
+            'json', 'jsonc', 'jwcc', 'json5'
                 => JsonExporter::export($path, $outputFile, $binStrings, $format, $input->getOption('pretty')),
             'xml'
                 => XmlExporter::export($path, $outputFile, $binStrings, $input->getOption('pretty')),

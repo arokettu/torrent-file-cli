@@ -21,7 +21,7 @@ final class JsonExporter
     public const SCHEMA = 'https://data.arokettu.dev/json/torrent-file-v1.json';
 
     /**
-     * @param 'json'|'json5'|'jsonc' $format
+     * @param 'json'|'json5'|'jsonc'|'jwcc' $format
      */
     public static function export(
         string $inputFile,
@@ -58,7 +58,7 @@ final class JsonExporter
         $h = fopen($outputFile, 'w');
         fwrite($h, match ($format) {
             'json5' => Json5Encoder::encode($json),
-            'jsonc' => JsonCEncoder::encode($json),
+            'jsonc', 'jwcc' => JsonCEncoder::encode($json),
             'json' => JsonEncoder::encode($json, $pretty ?
                 JsonEncoder::ENCODE_PRETTY :
                 JsonEncoder::ENCODE_DEFAULT)
