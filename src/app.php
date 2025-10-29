@@ -8,7 +8,6 @@
 declare(strict_types=1);
 
 use Arokettu\Torrent\CLI\Commands\CreateCommand;
-use Arokettu\Torrent\CLI\Commands\DumpCommand;
 use Arokettu\Torrent\CLI\Commands\ExportCommand;
 use Arokettu\Torrent\CLI\Commands\ImportCommand;
 use Arokettu\Torrent\CLI\Commands\ModifyCommand;

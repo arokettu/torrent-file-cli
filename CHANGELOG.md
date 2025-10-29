@@ -2,6 +2,14 @@
 
 ## 1.x
 
+### 1.5.0
+
+*Oct 29, 2025*
+
+* `dump` command removed, use `export`
+* `jwcc` format added as an alias for `jsonc`
+* Symfony 8 allowed for Composer installations
+
 ### 1.4.0-p1
 
 *Oct 10, 2025*
