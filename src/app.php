@@ -25,7 +25,6 @@ $application = new Application(
 
 $application->setCommandLoader(new FactoryCommandLoader([
     CreateCommand::NAME => fn () => new CreateCommand(),
-    DumpCommand::NAME   => fn () => new DumpCommand(),
     ModifyCommand::NAME => fn () => new ModifyCommand(),
     ShowCommand::NAME   => fn () => new ShowCommand(),
     SignCommand::NAME   => fn () => new SignCommand(),

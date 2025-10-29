@@ -54,10 +54,11 @@ Inspect torrent file:
 torrent-file show ~/build/myapptoupload.torrent
 ```
 
-Dump raw torrent file structure:
+Export torrent file to a readable file and import it back:
 
 ```bash
-torrent-file dump ~/build/myapptoupload.torrent
+torrent-file export ~/build/myapptoupload.torrent -o ~/build/myapptoupload.json
+torrent-file import ~/build/myapptoupload.json -o ~/build/myapptoupload.torrent
 ```
 
 Sign torrent file:

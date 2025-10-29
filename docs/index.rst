@@ -34,7 +34,6 @@ Documentation
    show
    sign
    export-import
-   dump
 
 License
 =======
