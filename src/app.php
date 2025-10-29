@@ -23,12 +23,12 @@ $application = new Application(
 );
 
 $application->setCommandLoader(new FactoryCommandLoader([
-    CreateCommand::NAME => fn () => new CreateCommand(),
-    ModifyCommand::NAME => fn () => new ModifyCommand(),
-    ShowCommand::NAME   => fn () => new ShowCommand(),
-    SignCommand::NAME   => fn () => new SignCommand(),
-    ExportCommand::NAME => fn () => new ExportCommand(),
-    ImportCommand::NAME => fn () => new ImportCommand(),
+    CreateCommand::NAME => static fn () => new CreateCommand(),
+    ModifyCommand::NAME => static fn () => new ModifyCommand(),
+    ShowCommand::NAME   => static fn () => new ShowCommand(),
+    SignCommand::NAME   => static fn () => new SignCommand(),
+    ExportCommand::NAME => static fn () => new ExportCommand(),
+    ImportCommand::NAME => static fn () => new ImportCommand(),
 ]));
 
 return $application;
