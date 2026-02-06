@@ -57,8 +57,7 @@
         "ext-openssl": "*",
         "phpunit/phpunit": "^10.5",
         "sandfox.dev/code-standard": "^1.2025.09.17",
-        "squizlabs/php_codesniffer": "*",
-        "vimeo/psalm": "^6"
+        "squizlabs/php_codesniffer": "*"
     },
     "suggest": {
         "ext-openssl": "for signature logic"
