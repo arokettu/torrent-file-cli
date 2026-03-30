@@ -11,9 +11,9 @@ namespace Arokettu\Torrent\CLI\Commands\Exporters\Json;
 
 use Arokettu\Torrent\CLI\Params\BinString;
 use Generator;
-use JsonSerializable as JsonSerializableAlias;
+use JsonSerializable;
 
-final class JsonList implements JsonSerializableAlias
+final class JsonList implements JsonSerializable
 {
     public function __construct(
         private readonly iterable $values,
