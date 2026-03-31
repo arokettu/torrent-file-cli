@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Arokettu\Torrent\CLI\Tests;
 
 use Arokettu\Torrent\CLI\Commands\ShowCommand;
+use Arokettu\Torrent\CLI\Tests\Helpers\FileHelper;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -21,12 +22,12 @@ final class ShowCommandTest extends TestCase
         $cmd = new CommandTester(new ShowCommand());
 
         $cmd->execute([
-            'file' => __DIR__ . '/data/ubuntu-24.04.3-desktop-amd64.iso.torrent',
+            'file' => __DIR__ . '/../data/ubuntu-24.04.3-desktop-amd64.iso.torrent',
         ]);
 
         $cmd->assertCommandIsSuccessful();
         self::assertEquals(
-            file_get_contents(__DIR__ . '/data/ubuntu-24.04.3-desktop-amd64.iso.torrent.txt'),
+            FileHelper::templated('ubuntu-24.04.3-desktop-amd64.iso.torrent.txt'),
             $cmd->getDisplay(),
         );
     }
@@ -36,12 +37,12 @@ final class ShowCommandTest extends TestCase
         $cmd = new CommandTester(new ShowCommand());
 
         $cmd->execute([
-            'file' => __DIR__ . '/data/flightgear-2024.1.4-windows-amd64.exe-hybrid.torrent',
+            'file' => __DIR__ . '/../data/flightgear-2024.1.4-windows-amd64.exe-hybrid.torrent',
         ]);
 
         $cmd->assertCommandIsSuccessful();
         self::assertEquals(
-            file_get_contents(__DIR__ . '/data/flightgear-2024.1.4-windows-amd64.exe-hybrid.torrent.txt'),
+            FileHelper::templated('flightgear-2024.1.4-windows-amd64.exe-hybrid.torrent.txt'),
             $cmd->getDisplay(),
         );
     }
