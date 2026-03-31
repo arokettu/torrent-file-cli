@@ -34,7 +34,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Arokettu\\Torrent\\CLI\\Tests\\": "tests"
+            "Arokettu\\Torrent\\CLI\\Tests\\": "tests/unit"
         }
     },
     "bin": [
