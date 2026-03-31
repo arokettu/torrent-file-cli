@@ -1,7 +1,19 @@
+<?php
+
+/**
+ * @copyright 2023 Anton Smirnov
+ * @license MIT https://spdx.org/licenses/MIT.html
+ */
+
+declare(strict_types=1);
+
+use Arokettu\Torrent\CLI\Tests\Helpers\DateHelper;
+
+?>
 Name: flightgear-2024.1.4-windows-amd64.exe
 Comment: Unofficial FlightGear 2024.1.4 (Windows) torrent created by FOSS Torrents. Published on https://fosstorrents.com
 Private: no
-Created on: Jan 22, 2026, 7:25:20 PM UTC
+Created on: <?= DateHelper::ts(1769109920) . "\n" ?>
 Created by: FOSS Torrents (https://fosstorrents.com/)
 Tracker: udp://fosstorrents.com:6969/announce
 Tracker list:
@@ -52,18 +64,19 @@ Magnet link: magnet:?xt=urn:btih:acd95a4c739c08d8cbd128a74d71674d77d08389&xt=urn
 BitTorrent v1 info hash: acd95a4c739c08d8cbd128a74d71674d77d08389
 BitTorrent v1 content size: 79.1 MiB
 BitTorrent v1 content:
- --------------------------------------- -------- ------ ------ 
-  File                                    Size     SHA1   Attr  
- --------------------------------------- -------- ------ ------ 
-  flightgear-2024.1.4-windows-amd64.exe   79 MiB                
- --------------------------------------- -------- ------ ------ 
+<?php /* note the spaces */ ?>
+<?= " --------------------------------------- -------- ------ ------ \n"?>
+<?= "  File                                    Size     SHA1   Attr  \n"?>
+<?= " --------------------------------------- -------- ------ ------ \n"?>
+<?= "  flightgear-2024.1.4-windows-amd64.exe   79 MiB                \n"?>
+<?= " --------------------------------------- -------- ------ ------ \n"?>
 
 BitTorrent v2 info hash: f431c93de5d8b0e405c942728de999b7567f01c27f214e65e606f92a7eed1284
 BitTorrent v2 content size: 79.1 MiB
 BitTorrent v2 content:
- --------------------------------------- -------- ------------------------------------------------------------------ ------ 
-  File                                    Size     Root Hash                                                          Attr  
- --------------------------------------- -------- ------------------------------------------------------------------ ------ 
-  flightgear-2024.1.4-windows-amd64.exe   79 MiB   9dc5148335a112e936f1b25d678d89a8d81d43b157fcb6ca6d8de5ad9db5427a         
- --------------------------------------- -------- ------------------------------------------------------------------ ------ 
-
+<?= " --------------------------------------- -------- ------------------------------------------------------------------ ------ \n"?>
+<?= "  File                                    Size     Root Hash                                                          Attr  \n"?>
+<?= " --------------------------------------- -------- ------------------------------------------------------------------ ------ \n"?>
+<?= "  flightgear-2024.1.4-windows-amd64.exe   79 MiB   9dc5148335a112e936f1b25d678d89a8d81d43b157fcb6ca6d8de5ad9db5427a         \n"?>
+<?= " --------------------------------------- -------- ------------------------------------------------------------------ ------ \n"?>
+<?= "\n" ?>

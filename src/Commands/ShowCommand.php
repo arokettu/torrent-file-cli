@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Arokettu\Torrent\CLI\Commands;
 
+use Arokettu\Torrent\CLI\Commands\Helpers\IntlHelper;
 use Arokettu\Torrent\TorrentFile;
 use Arokettu\Torrent\TorrentFile\V2\File as V2File;
 use Arokettu\Torrent\TorrentFile\V2\FileTree as V2FileTree;
@@ -61,12 +62,8 @@ final class ShowCommand extends Command
         $output->writeln('<comment>Private:</comment> ' . ($torrent->isPrivate() ? 'yes' : 'no'));
 
         if (($date = $torrent->getCreationDate())) {
-            $f = new \IntlDateFormatter(
-                \Locale::getDefault(),
-                \IntlDateFormatter::MEDIUM,
-                \IntlDateFormatter::MEDIUM,
-            );
-            $output->writeln('<comment>Created on:</comment> ' . $f->format($date) . ' UTC');
+            $f = IntlHelper::buildDateFormatter();
+            $output->writeln('<comment>Created on:</comment> ' . $f->format($date) . ' ' . $f->getTimeZoneId());
         }
 
         if (($createdBy = $torrent->getCreatedBy())) {
