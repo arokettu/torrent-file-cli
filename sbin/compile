@@ -6,6 +6,10 @@
  * @license MIT https://spdx.org/licenses/MIT.html
  */
 
+use Composer\Semver\Comparator;
+
+const BOX_REQUIRED = '4.7.1';
+
 chdir(__DIR__ . '/..');
 
 $timestamp = trim(shell_exec("git log -1 --format='%at'"));
@@ -15,6 +19,10 @@ $data['timestamp'] = (new DateTimeImmutable('@' . $timestamp))->format('c');
 file_put_contents('box.json', json_encode($data, JSON_PRETTY_PRINT));
 
 run('composer install');
+
+require(__DIR__ . '/../vendor/autoload.php');
+verifyBox();
+
 run('box compile');
 
 unlink('box.json');
@@ -32,4 +40,17 @@ function run(string $command): int
     }
 
     return -1;
+}
+
+function verifyBox(): void
+{
+    $version = trim(shell_exec("box --version"));
+    if (!preg_match('/^Box version (.*)@\w+$/', $version, $matches)) {
+        throw new Error('Box not installed or reports an invalid version');
+    }
+    $semver = $matches[1];
+
+    if (!Comparator::compare($semver, '>=', BOX_REQUIRED)) {
+        throw new Error('Box must be ' . BOX_REQUIRED . ' or later');
+    }
 }
