@@ -10,12 +10,6 @@
 * `jwcc` format added as an alias for `jsonc`
 * Symfony 8 allowed for Composer installations
 
-### 1.4.0-p1
-
-*Oct 10, 2025*
-
-* Updated dependencies to fix known PHP 8.5 deprecations
-
 ### 1.4.0
 
 *Aug 27, 2025*
