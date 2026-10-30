@@ -6,3 +6,4 @@
 /venv
 /.phpunit.result.cache
 /reports
+/tools
