@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phive xmlns="https://phar.io/phive">
-  <phar name="psalm" version="^6.0" installed="6.20.4" location="./tools/psalm" copy="false"/>
+  <phar name="psalm" version="^7.0" installed="7.0.2" location="./tools/psalm" copy="false"/>
+  <phar name="infection" version="^0.35.9" installed="0.35.9" location="./tools/infection" copy="false"/>
+  <phar name="humbug/box" version="^4.7.1" installed="4.7.1" location="./tools/box" copy="false"/>
 </phive>

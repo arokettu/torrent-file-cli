@@ -18,12 +18,13 @@ $data = json_decode(file_get_contents('box.tpl.json'), true);
 $data['timestamp'] = (new DateTimeImmutable('@' . $timestamp))->format('c');
 file_put_contents('box.json', json_encode($data, JSON_PRETTY_PRINT));
 
+run('phive install');
 run('composer install');
 
 require(__DIR__ . '/../vendor/autoload.php');
 verifyBox();
 
-run('box compile');
+run('tools/box compile');
 
 unlink('box.json');
 
@@ -44,8 +45,8 @@ function run(string $command): int
 
 function verifyBox(): void
 {
-    $version = trim(shell_exec("box --version"));
-    if (!preg_match('/^Box version (.*)@\w+$/', $version, $matches)) {
+    $version = trim(shell_exec("tools/box --version"));
+    if (!preg_match('/^Box version (.*)@\w+/', $version, $matches)) {
         throw new Error('Box not installed or reports an invalid version');
     }
     $semver = $matches[1];
