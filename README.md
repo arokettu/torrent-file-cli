@@ -27,11 +27,10 @@ Install for local user with composer:
 composer global require arokettu/torrent-file-cli
 ```
 
-Install globally by downloading prebuilt phar:
+Install globally by downloading prebuilt phar with [phive](https://github.com/phar-io/phive):
 
 ```bash
-sudo wget https://github.com/arokettu/torrent-file-cli/releases/latest/download/torrent-file.phar -O /usr/local/bin/torrent-file
-sudo chmod +x /usr/local/bin/torrent-file
+phive install -g arokettu/torrent-file-cli
 ```
 
 ## Examples
