@@ -14,15 +14,13 @@ With composer::
 
    composer require arokettu/torrent-file-cli
 
-With compiled phar, globally::
+With compiled phar using `phive <https://github.com/phar-io/phive>`_, globally::
 
-    sudo wget https://github.com/arokettu/torrent-file-cli/releases/latest/download/torrent-file.phar -O /usr/local/bin/torrent-file
-    sudo chmod +x /usr/local/bin/torrent-file
+   phive install -g arokettu/torrent-file-cli
 
 or locally::
 
-    wget https://github.com/arokettu/torrent-file-cli/releases/latest/download/torrent-file.phar -O $HOME/bin/torrent-file
-    chmod +x $HOME/bin/torrent-file
+   phive install arokettu/torrent-file-cli
 
 Documentation
 =============
