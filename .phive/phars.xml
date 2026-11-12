@@ -3,4 +3,5 @@
   <phar name="vimeo/psalm" version="^7.2.0" installed="7.2.0" location="./tools/psalm" copy="false"/>
   <phar name="infection/infection" version="^0.35.10" installed="0.35.10" location="./tools/infection" copy="false"/>
   <phar name="humbug/box" version="^4.7.1" installed="4.7.1" location="./tools/box" copy="false"/>
+  <phar name="composer/composer" version="^2.11.2" installed="2.11.2" location="./tools/composer" copy="false"/>
 </phive>
