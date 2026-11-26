@@ -13,7 +13,15 @@ cache:
     # install system packages
     - apt-get update && apt-get install -y git unzip
     # install extensions
-    - if [ "$INSTALL_XDEBUG" -eq 1 ]; then pecl install xdebug; docker-php-ext-enable xdebug; fi
+    - docker-php-ext-configure mbstring --disable-mbregex
+    - docker-php-ext-install mbstring
+    - if [ "$COVERAGE" -eq 1 ]; 
+      then
+        curl -fL --output /tmp/pie.phar https://github.com/php/pie/releases/latest/download/pie.phar \
+          && mv /tmp/pie.phar /usr/local/bin/pie \
+          && chmod +x /usr/local/bin/pie;
+        pie install --auto-install-build-tools pecl/pcov;
+      fi
     # install composer
     - php -r "copy('https://composer.github.io/installer.sig', '/tmp/composer.sig');"
     - php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');"
@@ -55,19 +63,19 @@ test-lowest:
 # coverage
 coverage:
   variables:
-    INSTALL_XDEBUG: 1
+    COVERAGE: 1
   extends: .test
   stage: report
   only:
     - master
-  image: php:8.2
+  image: php:8.5
   artifacts:
     paths:
       - reports
     expire_in: 1h
   script:
     - composer update
-    - XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover reports/coverage.xml --log-junit reports/junit.xml
+    - php -d pcov.enabled=1 vendor/bin/phpunit --coverage-clover reports/coverage.xml --log-junit reports/junit.xml
 
 coverage-upload:
   stage: report-upload
