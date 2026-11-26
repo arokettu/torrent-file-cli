@@ -1,4 +1,5 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "arokettu/torrent-file-cli",
     "description": "CLI tool to manipulate torrent files",
     "keywords": ["torrent", "bittorrent", "console", "cli"],
@@ -14,8 +15,7 @@
     "support": {
         "issues": "https://gitlab.com/sandfox/torrent-file-cli/-/issues",
         "source": "https://gitlab.com/sandfox/torrent-file-cli",
-        "docs": "https://torrent-file-cli.readthedocs.io/",
-        "chat": "https://gitter.im/arokettu/community"
+        "docs": "https://torrent-file-cli.readthedocs.io/"
     },
     "config": {
         "allow-plugins": {
